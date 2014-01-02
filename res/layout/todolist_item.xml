@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/yellow" >
+
+    <TextView
+        android:id="@+id/rowDate"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:fadingEdge="vertical"
+        android:maxLength="3"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/notepad_text" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="2dp"
+        android:layout_weight="1"
+        android:background="@color/notepad_margin" />
+
+    <TextView
+        android:id="@+id/row"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="27dp"
+        android:layout_toRightOf="@+id/rowDate"
+        android:fadingEdge="vertical"
+        android:maxLength="15"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/notepad_text" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/notepad_margin" />
+
+    <TextView
+        android:id="@+id/rowPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="58dp"
+        android:layout_toRightOf="@+id/row"
+        android:fadingEdge="vertical"
+        android:maxLength="6"
+        android:padding="10dp"
+        android:scrollbars="vertical"
+        android:textColor="@color/notepad_text" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/notepad_margin" />
+
+    <kankan.wheel.widget.WheelView
+        android:id="@+id/wheel1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/pads"
+        android:layout_marginRight="1dp"
+        android:background="@color/white"
+        android:padding="@dimen/pads" />
+    
+</RelativeLayout>

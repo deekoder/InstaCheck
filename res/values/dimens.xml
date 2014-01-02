@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="TablePad">20dp</dimen>
+    <dimen name="Space">160dp</dimen>
+    <dimen name="notepad_margin">30dp</dimen> 
+    <dimen name="pads">10dp</dimen>
+    <dimen name="divider">5dp</dimen>
+    <dimen name="divvy">3dp</dimen>
+
+</resources>
