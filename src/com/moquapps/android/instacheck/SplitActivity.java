@@ -1,7 +1,5 @@
 package com.moquapps.android.instacheck;
 
-
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -37,9 +35,7 @@ import android.view.View.OnTouchListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-
+/*This file excluded from build - ak - July7,2014*/
 @SuppressLint("NewApi")
 public class SplitActivity extends Activity {
 

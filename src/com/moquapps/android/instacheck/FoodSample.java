@@ -4,7 +4,7 @@ import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+/*This file excluded from build - ak - July7,2014*/
 public class FoodSample implements Parcelable {
     int intValue;
     String stirngValue;

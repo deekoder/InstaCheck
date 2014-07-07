@@ -15,7 +15,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
- 
+/*This file excluded from build - ak - July7,2014*/ 
 public class LoginActivity extends Activity {
   private UiLifecycleHelper uiHelper;
     private Session.StatusCallback callback = new Session.StatusCallback() {

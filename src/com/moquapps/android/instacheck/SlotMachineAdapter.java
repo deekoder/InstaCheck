@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
-
+ /*This file excluded from build - ak - July7,2014*/
  public class SlotMachineAdapter extends AbstractWheelAdapter {
         // Image size
         final int IMAGE_WIDTH = 60;

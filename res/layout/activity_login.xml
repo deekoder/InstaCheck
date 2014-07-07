@@ -78,9 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/skip_login"
-            android:background="@drawable/com_facebook_loginbutton_silver"
-            android:textSize="@dimen/com_facebook_loginview_text_size"
-            android:textColor="@color/com_facebook_blue"
+            
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:layout_marginTop="30dp"

@@ -7,16 +7,16 @@
 package com.googlecode.tesseract.android;
 
 public final class R {
+	public static final class drawable {
+		public static final int cameraiconmd = 0x7f02005e;
+		public static final int ic_launcher = 0x7f020064;
+	}
 	public static final class id {
-		public static final int imageView1 = 0x7f050019;
-		public static final int button1 = 0x7f050032;
-		public static final int button2 = 0x7f05001a;
+		public static final int button1 = 0x7f050044;
+		public static final int button2 = 0x7f050041;
+		public static final int imageView1 = 0x7f050040;
 	}
 	public static final class layout {
-		public static final int coverscreen = 0x7f030011;
-	}
-	public static final class drawable {
-		public static final int cameraiconmd = 0x7f020007;
-		public static final int ic_launcher = 0x7f02002d;
+		public static final int coverscreen = 0x7f03001b;
 	}
 }

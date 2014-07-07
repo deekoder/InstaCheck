@@ -1,7 +1,5 @@
 package com.moquapps.android.instacheck;
 
- 
-
 import android.content.*;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -13,7 +11,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
-
+/*This file excluded from build - ak - July7,2014*/
 public class TodoProvider extends ContentProvider {
 
   public static final Uri CONTENT_URI = Uri.parse("content://com.examples.provider.todo/todo");

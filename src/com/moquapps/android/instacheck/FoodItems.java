@@ -1,6 +1,4 @@
-
 package com.moquapps.android.instacheck;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,8 +16,7 @@ import android.util.Log;
 import android.view.View.MeasureSpec;
 import android.widget.Toast;
 
-
-
+/*This file excluded from build - ak - July7,2014*/   
 public class FoodItems implements Parcelable {
 	//public for now. Make Private later on.
 	public String orderCount;

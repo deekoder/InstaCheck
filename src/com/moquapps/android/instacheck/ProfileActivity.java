@@ -1,6 +1,5 @@
 package kankan.wheel.demo;
 
-
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.OnWheelScrollListener;
 import kankan.wheel.widget.WheelView;
@@ -13,7 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+/*This file excluded from build - ak - July7,2014*/
 public class CitiesActivity extends Activity {
     // Scrolling flag
     private boolean scrolling = false;

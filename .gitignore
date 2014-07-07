@@ -1,0 +1,9 @@
+.classpath
+.project
+*.apk
+*.class
+*.dex
+local.properties
+.metadata
+bin/
+gen/

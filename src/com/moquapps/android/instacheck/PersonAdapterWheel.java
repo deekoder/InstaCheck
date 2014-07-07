@@ -9,6 +9,7 @@ import android.widget.ImageView;
  /**
      * Adapter for countries
      */
+/*This file excluded from build - ak - July7,2014*/
 public class PersonAdapterWheel extends AbstractWheelTextAdapter {
         // Countries names
         private String countries[] =

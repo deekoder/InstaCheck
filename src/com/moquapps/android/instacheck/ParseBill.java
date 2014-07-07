@@ -27,7 +27,7 @@ import android.util.Log;
 import android.view.View.MeasureSpec;
 import android.widget.Toast;
 
- 
+/*This file excluded from build - ak - July7,2014*/ 
 public class ParseBill implements Parcelable {
 	
 		 
