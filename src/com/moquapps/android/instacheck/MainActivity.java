@@ -76,7 +76,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	          bmp.recycle();
 	     }
 	     //Bitmap photo = (Bitmap) data.getExtras().get("data"); 
-	     Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);
+	     Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
+	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill2);//Fatal-Signal-11
+	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill15);//BAD-Infinite-loop
+	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill14);//BAD-Infinite-Loop
+	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill10);//Fatal-Signal 11
 	     int mPhotoWidth = photo.getWidth();
 	     int mPhotoHeight = photo.getHeight();
          pic.setImageBitmap(photo);
