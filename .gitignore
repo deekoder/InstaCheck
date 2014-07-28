@@ -1,5 +1,5 @@
-bin/
-gen/
+bin
+gen
 .classpath
 .project
 *.apk
@@ -7,3 +7,4 @@ gen/
 *.dex
 local.properties
 .metadata
+project.properties

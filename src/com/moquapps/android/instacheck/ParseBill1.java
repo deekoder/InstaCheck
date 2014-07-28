@@ -98,6 +98,8 @@ public class ParseBill1   {
 	     // That number is also the latest Bill number that go on every 
 	     //record of the todoItems table. 
 	     //Ref: ToDoList:updateArray() 
+	    
+	     //remove this from here.deekoder - Jul 28th
          mInstaDBService.updateCount_numOfRecords_in_Bill_IFP_Table();//Jul 23,14
          
         //foodList = new ArrayList<FoodItems>();  
@@ -134,6 +136,17 @@ public class ParseBill1   {
 		    return 0;  
 		  }  
 		  return d;
+	}
+	
+	public boolean isParseGood(String s) {
+	   //mother of the goodness of string method.
+		//will improve this soon - deekoder Jul 28th
+		 extractTotal(s);
+		 extractTax(s);
+		 extractSubTotal(s);
+		 extractLineItems(s);
+		 return true; 
+		
 	}
 	//---------------------------------------
 	//iteration 1 : parse 
@@ -223,6 +236,18 @@ public class ParseBill1   {
             //Log.v("Number Error","Input must be a number.");
 			Log.v(TAG,"ParseBill:extractTax():Num Error-Input must be Num");
         }		 
+	}
+	
+	private boolean isWord()
+	{
+		
+		 
+		return true;
+	}
+	
+	private boolean isPrice() {
+		
+		return true;
 	}
 	//----------------------------------------
 	public void extractSubTotal(String s) {

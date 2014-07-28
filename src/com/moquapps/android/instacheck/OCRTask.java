@@ -65,33 +65,16 @@ public class OCRTask extends AsyncTask<Void, Integer, String> {
    
     pBill.print(context,finish);
     Log.v("OCRTask:Post Exec","Completed Parsing");
-    //pBill.extractItems("4.99", "Paneer Chilli", "2", "34.99", "Side Bar Grill", "3", 1);
-    //pBill.extractItems("2.99", "Red Lobsters", "1", "34.99", "Side Bar Grill", "2", 1);
-    pBill.extractTotal(finish);
-    pBill.extractTax(finish);
-    pBill.extractSubTotal(finish);
-    pBill.extractLineItems(finish);
-    pBill.kickoff();
-   // Intent parcelIntent = new Intent();
-    //context, SplitActivity.class);
-	//parcelIntent.setClass(context, SplitActivity.class);
-	//Log.v("OCRTask","Putting the parsel object");
-	//parcelIntent.putExtra("Parse", pBill);
-	//parcelIntent.putParcelableArrayListExtra("Custom Parcel", this);
-	//context.startActivity(parcelIntent);
     
-    //ParseBill.context = context;
+    if( pBill.isParseGood(finish) == true )
+    {
+    	// proceed assuming bill is a good bill kick off to the next screen.
+    	pBill.kickoff();
+    }
+    
+    
    
-    //ParseBill.verify(context,finish); 
-   
-/*	 
-    pBill.extractTotal(finish);
-	pBill.extractItems("4.99", "Paneer Chilli", "2", "34.99", "Side Bar Grill", "3", 1);
-	pBill.extractItems("3.99", "Malai Kofta", "1", "34.99", "Side Bar Grill", "0", 2);
-	pBill.extractItems("2.99", "Samosa Chaat", "1", "34.99", "Side Bar Grill", "2", 3);
-	pBill.extractItems("1.99", "Dosa Sambhar", "1", "34.99", "Side Bar Grill", "1", 4);
-	pBill.extractItems("0.99", "Gulab Jamun", "1", "34.99", "Side Bar Grill", "5", 5);
-	*/
+ 
     
   }
   

@@ -139,6 +139,8 @@ public class ToDoList extends Activity {
 	    		Log.v("Item","==>"+myListView.getItemAtPosition(i).toString());
 
 	    		 //Log.v("From Adapter","-->"+myListView.getAdapter().getItem(i));
+	    		
+	    		// Call the tip screen from here.
 	    		 
 	    		 
 	    	}
