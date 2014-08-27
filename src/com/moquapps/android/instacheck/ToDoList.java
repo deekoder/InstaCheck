@@ -79,6 +79,7 @@ public class ToDoList extends Activity {
   EditText myPerson;
   Button splitButton;
   Context cntxt;
+  final String TAG = "iCheck";//TAG for instaCheck
   
   /** Called when the activity is first created. */
   public void onCreate(Bundle icicle) {
@@ -126,24 +127,24 @@ public class ToDoList extends Activity {
     });
     splitButton.setOnClickListener(new View.OnClickListener() {
 	    public void onClick(View v) {
-	    	
 	    	int cntChoice = myListView.getCount();
-	    	
+	    	Log.v(TAG, "ToDoList():onCreate():splitBtnHandler():cntChoice="+cntChoice);
 	    	for(int i = 0; i < cntChoice; i++)
-	    	{
-	    		
-	    		
+	    	{	    			    	
 	    		FoodItem fw = (FoodItem) myListView.getAdapter().getItem(i);
 	    		//fw._categ = myListView.
 	    		 
-	    		Log.v("Item","==>"+myListView.getItemAtPosition(i).toString());
-
-	    		 //Log.v("From Adapter","-->"+myListView.getAdapter().getItem(i));
-	    		
+	    		//Log.v("Item","==>"+myListView.getItemAtPosition(i).toString());
+	    		//Log.v("From Adapter","-->"+myListView.getAdapter().getItem(i));
 	    		// Call the tip screen from here.
-	    		 
-	    		 
+	    		 	    		 
 	    	}
+	    	//Start TipActivity - ak Aug 27,2014
+	    	Intent intentToStartTipActivity = new Intent(ToDoList.this, TipActivity.class);
+	    	startActivity(intentToStartTipActivity);
+	    	Log.v(TAG, "ToDoList:onCreate():SplitBtnHandler():startActivity(intentToStartTipActivity)");
+	    	//Log.v(TAG, "ToDoList:onCreate():SplitBtnHandler():call finish()");
+	    	//finish();
 	    }    
  	});
     
@@ -205,7 +206,8 @@ public class ToDoList extends Activity {
     super.onSaveInstanceState(outState);
     //tAM.cancelAlarm();
   }
-
+  
+  
   @Override
   public void onRestoreInstanceState(Bundle savedInstanceState) {
     int pos = -1;
@@ -218,7 +220,7 @@ public class ToDoList extends Activity {
     tAM.cancelAlarm();
   }
   
-  @Override
+  /*@Override
   protected void onPause() {
     super.onPause();
     
@@ -232,7 +234,7 @@ public class ToDoList extends Activity {
     editor.putBoolean(ADDING_ITEM_KEY, addingNew);
     // Commit the preferences.
     editor.commit();
-  }
+  }*/
   
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {

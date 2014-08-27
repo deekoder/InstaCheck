@@ -7,12 +7,12 @@
     <string name="get_started">To get started, login using Facebook</string>
     <string name="skip_login">Skip Login</string>
     <string name="app_id">152995924909687</string>
-    
     <string name="hello">Hello World, TodoList!</string>
-  
-  <string name="add_new">Add New Item</string>
-  <string name="remove">Remove Item</string>
-  <string name="cancel">Cancel</string>
-  <string name="update">Update Item</string>
+    <string name="add_new">Add New Item</string>
+    <string name="remove">Remove Item</string>
+    <string name="cancel">Cancel</string>
+    <string name="update">Update Item</string>
+    <string name="title_activity_tip">Tip selection</string>
+    <string name="title_activity_final_tab">Final Tab (Aug 27,2014)</string>
 
 </resources>
