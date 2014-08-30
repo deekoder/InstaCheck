@@ -157,11 +157,36 @@ public class ToDoList extends Activity {
     updateArray(c);
     
   }
-
+  //---------------------------------------------------------------------
+  //ak-Aug28,2014
+  //This method is edited to query for all-items from the latest bill only. It replaces 
+  // old-query which get all items from all bills in the todoItems db-table. 
+  //
   private void updateArray(Context c) {
 	  //toDoListCursor.requery();
 
-	  toDoListCursor = getContentResolver().query(InstaProvider.CONTENT_URI, null, null, null, null);  
+	  //Old query which gets all-items from todoItem table, commented out - ak Aug 28,2014 
+	  //old query--> toDoListCursor = getContentResolver().query(InstaProvider.CONTENT_URI, null, null, null, null);//Aug28,14
+	  //ak-Aug28,2014 - Above old-query-line gets ALL entries from the db table
+	  //which get displayed on the 'Split-button' screen.
+	  //ak-Aug28,2014
+	  //To display only the latest bill item, we need to query the db for the latest bill only
+	  //To do this is 2 step process. 
+	  //  Step-1 Get the total number of entries in the new table. It is also the latestBill_ImageNumber
+	  //  Step-2 Get rows from old table which match the latestBill_ImageNumber
+	 
+      Integer latestBill_ImageNumber = InstaDBService.mNumOfRecords_inBill_IFP_Table;
+      Log.v(TAG,"ToDoList:updateArray():latestBill_ImageNum = " + latestBill_ImageNumber);
+	  toDoListCursor = getContentResolver().query(InstaProvider.CONTENT_URI, 
+		  null, //projection i.e. which columns to return - null returns all columns as before
+		  (InstaProvider.KEY_BILL_IMAGE_NUMBER + " = " + latestBill_ImageNumber),		 		  
+	      null,  //selection-Args
+		  null); //sort order
+	  
+	  //ak-That's it - later logic is same as before. But now, only items for latest bill
+	  //   is displayed because the above new-query is constructed to get items from the 
+	  //   latest bill in todoItems db-table.
+	  
 	//  todoItems.clear();
 	  foodItems.clear();  
 	  if (toDoListCursor.moveToFirst())
@@ -181,7 +206,7 @@ public class ToDoList extends Activity {
 	  aa.notifyDataSetChanged();
 	  //if(mBound != true) spinner.setAdapter(adapter);
 	}
-
+  //-----------------------------------------------------------------
   private void restoreUIState() {
     // Get the activity preferences object.
     SharedPreferences settings = getPreferences(0);

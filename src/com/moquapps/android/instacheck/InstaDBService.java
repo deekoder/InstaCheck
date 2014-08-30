@@ -14,7 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class InstaDBService extends Service {
-	public int mNumOfRecords_inBill_IFP_Table = 1;
+	public static int mNumOfRecords_inBill_IFP_Table = 1;
 	Cursor mCursor;
 	final String TAG = "iCheck";//TAG for instaCheck
     //Binder given to clients	
