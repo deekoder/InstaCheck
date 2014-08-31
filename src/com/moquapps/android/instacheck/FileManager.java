@@ -8,12 +8,8 @@ import java.io.OutputStream;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View.MeasureSpec;
-import android.widget.Toast;
 
 
 public class FileManager {

@@ -1,189 +1,118 @@
 package com.moquapps.android.instacheck;
 
-import java.lang.ref.SoftReference;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import java.util.*;
-
-
- 
-import kankan.wheel.widget.OnWheelChangedListener;
-import kankan.wheel.widget.OnWheelScrollListener;
-import kankan.wheel.widget.WheelView;
-import kankan.wheel.widget.adapters.AbstractWheelAdapter;
-import kankan.wheel.widget.adapters.NumericWheelAdapter;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.*;
-import android.view.ViewGroup.LayoutParams;
-import android.view.animation.AnticipateOvershootInterpolator;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
 
   int resource;
   Context c;
-  private boolean wheelScrolled = false;
+   
+  
+   
+  
+  public ArrayList <String> selectedPersons = new ArrayList<String>();
+  
+  List<String> list = new ArrayList<String>();
+  
   
   public ToDoItemAdapter(Context _context, 
                              int _resource, 
                              List<FoodItem> _items) {
     super(_context, _resource, _items);
+   
     resource = _resource;
     
     c =_context;
+    list.add("P1");
+    list.add("P2");
+    list.add("P3");
+    list.add("P4");
+    list.add("P5");
     
-
   }
+  public ArrayList<String> getSelectedPersons() {
+	  return selectedPersons;
+  }
+  private class ViewHolder {
+	    
+	   Spinner personSpinner;
+	   TextView priceView;
+	   TextView nameView;
+	   TextView countView;
+	   
+	  }
 
+  
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
-    LinearLayout todoView;
-
-    FoodItem item = getItem(position);
+  
+   ViewHolder holder = null;
+   Log.v("ConvertView", String.valueOf(position));
+  
+   if (convertView == null) {
+   LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+   convertView = vi.inflate(R.layout.todolist_item, null);
+  
+   holder = new ViewHolder();
+   holder.priceView = (TextView)convertView.findViewById(R.id.rowDate);
+   holder.nameView = (TextView)convertView.findViewById(R.id.row);
+   holder.countView = (TextView)convertView.findViewById(R.id.rowPrice); 
+   holder.personSpinner = (Spinner)convertView.findViewById(R.id.spinner2);
+   
     
+   convertView.setTag(holder);
+  
+   holder.personSpinner.setOnItemSelectedListener(
+           new AdapterView.OnItemSelectedListener() {
+               @Override
+               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            	   Object item = parent.getItemAtPosition(position);
+            	   Log.v("Item is", "+: "+item.toString());    
+            	   selectedPersons.add(position, item.toString());
+            	       
+               }
+               @Override
+               public void onNothingSelected(AdapterView<?> parent) {
+                   
+               }
+           }
+       );
+
      
+   }
+   else {
+    holder = (ViewHolder) convertView.getTag();
+   }
   
-
-// spinner.setAdapter(adapter);
-   // String taskString = item.getTask();
-    String orderCount = item.getOcount();
-  //  Date createdDate = item.getCreated();
-    String orderName = item.getOname();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-    String orderPrice = item.getOprice();
-  //  String dateString = sdf.format(createdDate);
+   holder.personSpinner = (Spinner)convertView.findViewById(R.id.spinner2);
+   ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_item, list);
+   holder.personSpinner.setAdapter(adapter);
+   FoodItem item = getItem(position);
+   
+   holder.personSpinner.setTag(item._orderName);
     
-
-    if (convertView == null) {
-      todoView = new LinearLayout(getContext());
-      String inflater = Context.LAYOUT_INFLATER_SERVICE;
-      LayoutInflater vi = (LayoutInflater)getContext().getSystemService(inflater);
-      vi.inflate(resource, todoView, true);
-    } else {
-      todoView = (LinearLayout) convertView;
-    }
-
-    TextView priceView = (TextView)todoView.findViewById(R.id.rowDate);
-    TextView nameView = (TextView)todoView.findViewById(R.id.row);
-    TextView countView = (TextView)todoView.findViewById(R.id.rowPrice); 
-    WheelView wheel = (WheelView)todoView.findViewById(R.id.wheel1);
-    //final EditText myPerson = (EditText)todoView.findViewById(R.id.person);
+   holder.priceView.setText(item._orderPrice);
+   holder.nameView.setText(item._orderName);
+   holder.countView.setText(item._orderCount);
+   
+    
+   
+  
+   return convertView;
+  
+  }
+   
      
-    
-    
-    
-    
-    
-    priceView.setText(orderPrice);
-    nameView.setText(orderName);
-    countView.setText(orderCount);
-    wheel.setViewAdapter(new SlotMachineAdapter(c));
-    wheel.setCurrentItem(0);
-    wheel.setCyclic(true);
-    wheel.setEnabled(true);
-    
-    OnWheelScrollListener scrolledListener = new OnWheelScrollListener() {
-        public void onScrollingStarted(WheelView wheel) {
-            wheelScrolled = true;
-        }
-        public void onScrollingFinished(WheelView wheel) {
-            wheelScrolled = false;
-          //  updateStatus();
-        }
-    };
-    
-    // Wheel changed listener
-    OnWheelChangedListener changedListener = new OnWheelChangedListener() {
-        public void onChanged(WheelView wheel, int oldValue, int newValue) {
-            if (!wheelScrolled) {
-            	Log.v("Selected Wheel Item "," -->"+newValue);
-                //updateStatus();
-            }
-        }
-    };
-    
-    
-    wheel.addChangingListener(changedListener);
-    wheel.addScrollingListener(scrolledListener);
-   
-   
-   
-    return todoView;
-  }
-  
-  private class SlotMachineAdapter extends AbstractWheelAdapter {
-      // Image size
-      final int IMAGE_WIDTH = 60;
-      final int IMAGE_HEIGHT = 46;
-      
-      // Slot machine symbols
-      private final int items[] = new int[] {
-    	  	  R.drawable.hulk,
-    		  R.drawable.jj, 
-    		  R.drawable.gobble, 
-    		  R.drawable.delicious
-       };
-      
-      // Cached images
-      private List<SoftReference<Bitmap>> images;
-      
-      // Layout inflater
-      private Context context;
-      
-      /**
-       * Constructor
-       */
-      public SlotMachineAdapter(Context context) {
-          this.context = context;
-          images = new ArrayList<SoftReference<Bitmap>>(items.length);
-          for (int id : items) {
-              images.add(new SoftReference<Bitmap>(loadImage(id)));
-          }
-      }
-      
-      /**
-       * Loads image from resources
-       */
-      private Bitmap loadImage(int id) {
-          Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id);
-          Bitmap scaled = Bitmap.createScaledBitmap(bitmap, IMAGE_WIDTH, IMAGE_HEIGHT, true);
-          bitmap.recycle();
-          return scaled;
-      }
-
-      @Override
-      public int getItemsCount() {
-          return items.length;
-      }
-
-      // Layout params for image view
-      final LayoutParams params = new LayoutParams(IMAGE_WIDTH, IMAGE_HEIGHT);
-      
-      @Override
-      public View getItem(int index, View cachedView, ViewGroup parent) {
-          ImageView img;
-          if (cachedView != null) {
-              img = (ImageView) cachedView;
-          } else {
-              img = new ImageView(context);
-          }
-          img.setLayoutParams(params);
-          SoftReference<Bitmap> bitmapRef = images.get(index);
-          Bitmap bitmap = bitmapRef.get();
-          if (bitmap == null) {
-              bitmap = loadImage(items[index]);
-              images.set(index, new SoftReference<Bitmap>(bitmap));
-          }
-          img.setImageBitmap(bitmap);
-          
-          return img;
-      }
-  }
-  
 }
 

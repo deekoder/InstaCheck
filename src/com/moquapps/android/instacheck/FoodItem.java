@@ -1,26 +1,23 @@
 package com.moquapps.android.instacheck;
 
-import android.content.Context;
-import android.view.animation.AnticipateOvershootInterpolator;
-import kankan.wheel.widget.WheelView;
-import kankan.wheel.widget.adapters.NumericWheelAdapter;
-
-
+import java.util.ArrayList;
+ 
 public class FoodItem {
 
+  ArrayList<String> personList;	
   String _orderCount;
   String _orderName;
   String _orderPrice;
   String _rating;
   int _categ;
- // Context context;
-  
+  String selectedPerson;
+ 
   int ID;
-  
- // Date _created;
-  
+   
   String _restaurantName;
   String _totalSpent;
+  
+  
   
   public String getRating()
   {
@@ -57,25 +54,29 @@ public class FoodItem {
  	  _orderCount = orderCount;
  	  _orderName = orderName;
  	  _orderPrice = orderPrice;
- //	 wheel.findViewById(R.id.country_name);
- //	 wheel.setViewAdapter(new NumericWheelAdapter(context, 0, 9));
-  //   wheel.setCyclic(true);
-   //  wheel.setInterpolator(new AnticipateOvershootInterpolator());
-   //  wheel.addChangingListener(changedListener);
-    // wheel.addScrollingListener(scrolledListener);
-     
- 	//  wheel.findViewById(R.id.wheel1);
- 	 // wheel.setViewAdapter(new NumericWheelAdapter(ParseBill1.context, 0, 9));
-	  //wheel.setCurrentItem(0);
+ 	  
+ 	  personList = new ArrayList<String>();
+ 	  personList.add("P1");
+ 	  personList.add("P2");
+ 	  personList.add("P3");
+ 	  personList.add("P4");
+ 	  personList.add("P5");
+	  personList.add("P6");
+	  personList.add("P7");
+	  personList.add("P8");
+	  personList.add("P9");
+ 	  personList.add("P10");
+ 	  personList.add("P11");
+ 	  personList.add("P12");
+ 	  personList.add("P13");
+	  personList.add("P14");
+	  personList.add("P15");
+	  personList.add("P16");
+
 	  
  	 
    }
-   
-   
- 
-	 
-   
-     
+  
 public String getRname() {
 		return _restaurantName;
 	}

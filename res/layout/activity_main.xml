@@ -14,6 +14,7 @@
 
         <ImageView
             android:id="@+id/imageView1"
+            android:contentDescription="@string/iDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -22,23 +23,25 @@
             android:src="@drawable/cameraiconmd" />
 
         <LinearLayout
+            android:id="@+id/linearLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageView1"
             android:layout_below="@+id/imageView1"
             android:layout_marginTop="64dp"
             android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/button2"
-                style="@style/ButtonText"
-                android:layout_width="181dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="64dp"
-                android:background="@drawable/redbutton"
-                android:text="Snap a Check" />
-
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/ButtonText"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/linearLayout1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="31dp"
+            android:background="@drawable/redbutton"
+            android:text="@string/instStr" />
     </RelativeLayout>
 
 </LinearLayout>

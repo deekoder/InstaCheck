@@ -1,10 +1,8 @@
 
 package com.moquapps.android.instacheck;
 
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -23,7 +21,7 @@ public class OCRTask extends AsyncTask<Void, Integer, String> {
   int i=0;
   
   public OCRTask(Context context, Bitmap bitmap, OCRCallback callback) {
-    this.context = context;
+    OCRTask.context = context;
     this.imageToProcess = bitmap.copy(Bitmap.Config.ARGB_8888, true);
     progress = new ProgressDialog(context);
     this.callback = callback;
