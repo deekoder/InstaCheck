@@ -58,7 +58,7 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
   public View getView(int position, View convertView, ViewGroup parent) {
   
    ViewHolder holder = null;
-   Log.v("ConvertView", String.valueOf(position));
+   
   
    if (convertView == null) {
    LayoutInflater vi = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -78,7 +78,7 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
                @Override
                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             	   Object item = parent.getItemAtPosition(position);
-            	   Log.v("Item is", "+: "+item.toString());    
+            	        
             	   selectedPersons.add(position, item.toString());
             	       
                }

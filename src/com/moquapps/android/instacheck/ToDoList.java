@@ -64,8 +64,8 @@ public class ToDoList extends Activity {
 	    	for(int i = 0; i < cntChoice; i++)
 	    	{	    			    	
 	    		FoodItem fw = (FoodItem) myListView.getAdapter().getItem(i);
-	    		Log.v("FoodItem", fw.toString());
-	    		Log.v("Selection", ": "+(aa.getSelectedPersons()).get(i).toString());
+	    		//Log.v("FoodItem", fw.toString());
+	    		//Log.v("Selection", ": "+(aa.getSelectedPersons()).get(i).toString());
 	    		PersonMath p1 = new PersonMath();
 	    		  
 	    		p1.price = Double.parseDouble(fw._orderPrice);
@@ -74,7 +74,7 @@ public class ToDoList extends Activity {
 	    		pList.add(i,p1); 	    		 
 	    	}
 	    	 
-	    	Log.v("Selection", aa.getSelectedPersons().toString());
+	    //	Log.v("Selection", aa.getSelectedPersons().toString());
 	    	
 	    	
 	    	Intent intentToStartTipActivity = new Intent(ToDoList.this, TipActivity.class);
@@ -105,7 +105,7 @@ public class ToDoList extends Activity {
 		  null);  
 	  
 	  
-	  toDoListCursor = getContentResolver().query(InstaProvider.CONTENT_URI, null, null, null, null);  
+	    
 	 
 	  foodItems.clear();  
 	  if (toDoListCursor.moveToFirst())

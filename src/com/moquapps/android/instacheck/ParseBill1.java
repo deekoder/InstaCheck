@@ -1,4 +1,4 @@
-
+ 
 package com.moquapps.android.instacheck;
 
 import java.util.StringTokenizer;
@@ -14,8 +14,21 @@ import com.moquapps.android.instacheck.InstaDBService.AddBinder;
 //import android.content.Context;
  
 public class ParseBill1   {		 
-	 
+		private static String parseString;
+		
+		private String restaurantName;
+		private String restaurantAddress;
+		private String restaurantPhone;
+		private String checkNo;
+		private String serverName;
+		private String tableNo;
+		private String date;
+		private String time;
+		private String clientCount; 
+		private String totalString;
 		public static double total=0.0;
+		private FoodItem f;
+	 
 		public Context context;
 	 
 		InstaDBService mInstaDBService;
@@ -27,7 +40,8 @@ public class ParseBill1   {
 		Intent intent = new Intent(context, InstaDBService.class);
 		context.bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 		    
-		 		 		 		  
+		 parseString = "";
+		 totalString="0.0";		 		 		  
 	}
 	  
 	public void kickoff() {
@@ -41,13 +55,13 @@ public class ParseBill1   {
 	 
 	public void print(Context c, String s) {		
 		 
-		//TODO: putting this here is a hack. Please remove.
+		//putting this here is a hack. Please remove.
 	    mInstaDBService.addBill_ImageFilePathName("storage.emulated.0.DCIM.Camera"); 
         mInstaDBService.updateCount_numOfRecords_in_Bill_IFP_Table(); 
          
        
 		context = c;
-		 
+		parseString = s;
 		 
 		Log.v(TAG,"ParseBill:print():s = "+s);
 		Log.v(TAG,"ParseBill:print():-- finished printing long-String-s above");
@@ -57,7 +71,7 @@ public class ParseBill1   {
 	{  
 	  try  
 	  {  
-	     
+	    double d = Double.parseDouble(str);  
 	  }  
 	  catch(NumberFormatException nfe)  
 	  {  
@@ -91,7 +105,7 @@ public class ParseBill1   {
 	 
 	public void extractLineItems(String s) {
 		String delim = "\n";
-		 
+		String output="",temp="";
 		String tmp="";
 		FoodItem i = new FoodItem();
 		StringBuilder stringBuilder;
@@ -150,7 +164,7 @@ public class ParseBill1   {
 					temp = toks.nextToken();
 				}
 				String outputs = temp.replaceAll("\\s+",""); 
-				 
+				totalString = outputs;
 				output = outputs.replaceAll("\\n","");
 				break;
 			}
@@ -169,7 +183,17 @@ public class ParseBill1   {
         }		 
 	}
 	
-	 
+	private boolean isWord()
+	{
+		
+		 
+		return true;
+	}
+	
+	private boolean isPrice() {
+		
+		return true;
+	}
 	 
 	
 	public void extractSubTotal(String s) {
@@ -185,7 +209,7 @@ public class ParseBill1   {
 					temp = toks.nextToken();
 				}
 				String outputs = temp.replaceAll("\\s+",""); 
-			 
+				totalString = outputs;
 				output = outputs.replaceAll("\\n","");
 				break;
 			}
@@ -218,7 +242,7 @@ public class ParseBill1   {
 					temp = toks.nextToken();
 				}
 				String outputs = temp.replaceAll("\\s+",""); 
-				 
+				totalString = outputs;
 				output = outputs.replaceAll("\\n","");
 				break;
 			}
