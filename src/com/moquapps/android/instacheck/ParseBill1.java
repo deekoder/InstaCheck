@@ -33,7 +33,7 @@ public class ParseBill1   {
 	 
 		InstaDBService mInstaDBService;
 		boolean mBound = false;
-		final String TAG = "iCheck"; 
+		public static final String TAG = "iCheck"; 
 	 
 	public ParseBill1(Context c) {
 		context=c; 
@@ -54,19 +54,18 @@ public class ParseBill1   {
 	}
 	 
 	public void print(Context c, String s) {		
-		 
-		//putting this here is a hack. Please remove.
-	    mInstaDBService.addBill_ImageFilePathName("storage.emulated.0.DCIM.Camera"); 
-        mInstaDBService.updateCount_numOfRecords_in_Bill_IFP_Table(); 
-         
-       
 		context = c;
 		parseString = s;
 		 
-		Log.v(TAG,"ParseBill:print():s = "+s);
-		Log.v(TAG,"ParseBill:print():-- finished printing long-String-s above");
+		//Log.v(TAG,"ParseBill:print():s = "+s);
+		//Log.v(TAG,"ParseBill:print():-- finished printing long-String-s above");
 	}
-	 
+	
+	public void updateBill_ImagePathTableAndImageCount(){
+	   mInstaDBService.addBill_ImageFilePathName("storage.emulated.0.DCIM.Camera"); 
+       mInstaDBService.updateCount_numOfRecords_in_Bill_IFP_Table(); 
+	}
+	
 	public static boolean isNumeric(String str)  
 	{  
 	  try  
@@ -179,7 +178,7 @@ public class ParseBill1   {
 			}
 		}  catch (NumberFormatException nfe) {
             
-			Log.v(TAG,"ParseBill:extractTax():Num Error-Input must be Num");
+		   //Log.v(TAG,"ParseBill:extractTax():Num Error-Input must be Num");
         }		 
 	}
 	
@@ -260,7 +259,7 @@ public class ParseBill1   {
 			}
 		}  catch (NumberFormatException nfe) {
             
-		   Log.v(TAG,"ParseBill:extractTotal():Error:Input must be a number ");
+		   //Log.v(TAG,"ParseBill:extractTotal():Error:Input must be a number ");
         }		 		 
 	}
 	 
@@ -284,7 +283,7 @@ public class ParseBill1   {
 	          AddBinder binder = (AddBinder) service;
 	          mInstaDBService = binder.getService();
 	         
-	          Log.v(TAG,"ParseBill:ServiceConnection:0nServiceConnected()");
+	          //Log.v(TAG,"ParseBill:ServiceConnection:0nServiceConnected()");
 	          mBound = true;
 	      }
            

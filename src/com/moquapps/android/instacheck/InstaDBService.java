@@ -12,21 +12,20 @@ import android.util.Log;
 
 public class InstaDBService extends Service {
 	public static int mNumOfRecords_inBill_IFP_Table = 1;
-	Cursor mCursor;
-	final String TAG = "iCheck"; 
+	Cursor mCursor; 
 	
     private final IBinder mBinder = new AddBinder();     
     
     public class AddBinder extends Binder {
        InstaDBService getService() {
-    	 Log.i(TAG,"InstaDBService:AddBinder()");
+       //Log.v(ParseBill1.TAG,"InstaDBService:AddBinder()");
          return InstaDBService.this;
        }
-    }
+    }   
      
     @Override
     public IBinder onBind(Intent intent) {
-       Log.i(TAG,"InstaDBService:OnBind()");
+       //Log.v(ParseBill1.TAG,"InstaDBService:OnBind()");
        return mBinder;
     }
     
@@ -42,15 +41,15 @@ public class InstaDBService extends Service {
 		values.put(InstaProvider.KEY_BILL_IMAGE_NUMBER, mNumOfRecords_inBill_IFP_Table);
 		 
 		 
-		Log.i(TAG,"InstaDBService:addTask():price = "+orderPrice+
-				              " name= "+orderName+" count="+orderCount);
+		//Log.v(ParseBill1.TAG,"InstaDBService:addTask():price = "+orderPrice+
+		//		              " name= "+orderName+" count="+orderCount);
 		getContentResolver().insert(InstaProvider.CONTENT_URI, values);
 		 		 
     }
      
     public void addBill_ImageFilePathName(String bill_ImageFilePathName){
-       Log.i(TAG,"InstaDBService:addBillImageFilePathName():path = "+
-                                                            bill_ImageFilePathName);
+       //Log.v(ParseBill1.TAG,"InstaDBService:addBillImageFilePathName():path = "+
+       //                                      bill_ImageFilePathName);
        ContentValues cValues = new ContentValues();
        cValues.put(InstaProvider.KEY_BILL_IMAGE_FILE_PATH, bill_ImageFilePathName);       
        getContentResolver().insert(InstaProvider.CONTENT_URI_BILL_IFP_TABLE,cValues);       
@@ -66,14 +65,14 @@ public class InstaDBService extends Service {
     	    null);  
     	   
     	mNumOfRecords_inBill_IFP_Table = mCursor.getCount();
-        Log.v(TAG, "InstaDBService:updateCount_numOfRecords..IFP_Table():mNumOfRecords = "
-			       + mNumOfRecords_inBill_IFP_Table);
+        //Log.v(ParseBill1.TAG, "InstaDBService:updateCount_numOfRecords..IFP_Table():mNumOfRecords = "
+		//	       + mNumOfRecords_inBill_IFP_Table);
     }
     
     public void removeTask(String which){    	
 	   getContentResolver().delete(Uri.parse(InstaProvider.CONTENT_URI +"/"+which),null,null);
 	    
-	   Log.i(TAG,"InstaDBService:removeTask()");
+	   //Log.v(ParseBill1.TAG,"InstaDBService:removeTask()");
    }
     
 }

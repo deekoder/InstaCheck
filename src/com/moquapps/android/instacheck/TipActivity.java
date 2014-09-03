@@ -13,7 +13,6 @@ public class TipActivity extends Activity {
 	private SeekBar seekBar; 
 	private TextView textViewProgress; 	
 	Handler seekBarHandlerToChangeProgressColor;
-	final String TAG = "iCheck"; 
 	
 	
 	@Override

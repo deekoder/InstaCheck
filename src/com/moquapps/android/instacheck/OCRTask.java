@@ -64,8 +64,10 @@ public class OCRTask extends AsyncTask<Void, Integer, String> {
     pBill.print(context,finish);
     Log.v("OCRTask:Post Exec","Completed Parsing");
     
+    pBill.updateBill_ImagePathTableAndImageCount();      
+    
     if( pBill.isParseGood(finish) == true )
-    {
+    {        	
     	// proceed assuming bill is a good bill kick off to the next screen.
     	pBill.kickoff();
     }

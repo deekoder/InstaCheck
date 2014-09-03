@@ -19,14 +19,12 @@ public class InstaProvider extends ContentProvider {
   private static final String AUTHORITY = "com.moquapps.instacheck.provider.todo"; 
   public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/todo");
   public static final Uri CONTENT_URI_BILL_IFP_TABLE = Uri.parse("content://" + AUTHORITY + "/bill_ImageFilePath");
-  
-  private static final String TAG = "iCheck"; 
-  
+   
   @Override
   public boolean onCreate() {
     Context context = getContext();
      
-    Log.v(TAG, "--InstaProvider:onCreate()");
+    //Log.v(ParseBill1.TAG, "--InstaProvider:onCreate()");
     ToDoDatabaseHelper dbHelper = new ToDoDatabaseHelper(context,  
                                                    DATABASE_NAME,  
                                                    null, 
@@ -47,19 +45,19 @@ public class InstaProvider extends ContentProvider {
 
     if (uri == CONTENT_URI){
        qb.setTables(TODO_TABLE);
-       Log.v(TAG, "InstaProvider:query()-setTables(TODO_TABLE)");
+       //Log.v(ParseBill1.TAG, "InstaProvider:query()-setTables(TODO_TABLE)");
     }
     else if (uri == CONTENT_URI_BILL_IFP_TABLE){
        qb.setTables(BILL_IFP_TABLE);
-       Log.v(TAG, "InstaProvider:query()-setTables(BILL_IFP_TABLE)");
+       //Log.v(ParseBill1.TAG, "InstaProvider:query()-setTables(BILL_IFP_TABLE)");
     }
     else{
        qb.setTables(TODO_TABLE);
-       Log.v(TAG, "**InstaProvider:query()*NO-URI-MATCH**setTables(TODO_TABLE)");
+       //Log.v(ParseBill1.TAG, "**InstaProvider:query()*NO-URI-MATCH**setTables(TODO_TABLE)");
     }
     
-    Log.v(TAG, "InstaProvider:query():uriMatcher.match = " + uriMatcher.match(uri));
-    Log.v(TAG, "InstaProvider:query():uri.getPathSegments()=" + uri.getPathSegments());
+    //Log.v(ParseBill1.TAG, "InstaProvider:query():uriMatcher.match = " + uriMatcher.match(uri));
+    //Log.v(ParseBill1.TAG, "InstaProvider:query():uri.getPathSegments()=" + uri.getPathSegments());
      
     String orderBy;
     orderBy = sort;
@@ -73,7 +71,7 @@ public class InstaProvider extends ContentProvider {
                orderBy); 
       
     c.setNotificationUri(getContext().getContentResolver(), uri);
-    Log.v(TAG, "InstaProvider:query()Cusor c.Count =" + c.getCount());
+    //Log.v(ParseBill1.TAG, "InstaProvider:query()Cusor c.Count =" + c.getCount());
     
     return c;
   }
@@ -94,7 +92,7 @@ public class InstaProvider extends ContentProvider {
 	     }
 	     break;
 	  case BILL_IFP:
-		 Log.v(TAG, "InstaProvider:insert:BILL_IFP_TABLE:cValue = " + cValues);
+		 //Log.v(ParseBill1.TAG, "InstaProvider:insert:BILL_IFP_TABLE:cValue = " + cValues);
 		 long rowID2 = todoDB.insert(BILL_IFP_TABLE, "nullColumnHack", cValues);		       
 		 if (rowID2 > 0) {
 		    uriWithAppendedId = ContentUris.withAppendedId(CONTENT_URI_BILL_IFP_TABLE, rowID2);
@@ -102,7 +100,7 @@ public class InstaProvider extends ContentProvider {
 		 }
 		 break;	   	    	    
       default:
-    	 Log.v(TAG,"InstaProvider:insert:TODOTABLE:k = " + k );
+    	 //Log.v(ParseBill1.TAG,"InstaProvider:insert:TODOTABLE:k = " + k );
     	 throw new SQLException("InstaProvider:insert():Failed to insert row into " + uriParameter);	    
 	}
     return uriWithAppendedId; 
@@ -111,7 +109,7 @@ public class InstaProvider extends ContentProvider {
   @Override
   public int delete(Uri uri, String where, String[] whereArgs) {
     int count;
-    Log.v(TAG, "--InstaProvider:delete()");
+    //Log.v(ParseBill1.TAG, "--InstaProvider:delete()");
     switch (uriMatcher.match(uri)) {
       case TODO:
         count = todoDB.delete(TODO_TABLE, where, whereArgs);
@@ -137,7 +135,7 @@ public class InstaProvider extends ContentProvider {
   @Override
   public int update(Uri uri, ContentValues values, String where, String[] whereArgs) {
     int count;
-    Log.v(TAG, "--InstaProvider:update()");
+    //Log.v(ParseBill1.TAG, "--InstaProvider:update()");
     switch (uriMatcher.match(uri)) {
       case TODO: count = todoDB.update(TODO_TABLE, values, 
                                                where, whereArgs);
@@ -165,7 +163,7 @@ public class InstaProvider extends ContentProvider {
    
   @Override
   public String getType(Uri uri) {
-	Log.v(TAG, "--InstaProvider:getType()-WHO call this and Why ?");
+	//Log.v(ParseBill1.TAG, "--InstaProvider:getType()-WHO call this and Why ?");
     switch (uriMatcher.match(uri)) {
       case TODO: return "vnd.android.cursor.dir/vnd.examples.todo";
       case TODO_ID: return "vnd.android.cursor.item/vnd.examples.todo";
@@ -237,27 +235,27 @@ public class InstaProvider extends ContentProvider {
                               CursorFactory factory, int version) {
       super(context, name, factory, version);
        
-      Log.v(TAG, "--InstaProvider:ToDoDatabaseHelper():constructor()");
+      //Log.v(ParseBill1.TAG, "--InstaProvider:ToDoDatabaseHelper():constructor()");
     }
      
     
     @Override
     public void onCreate(SQLiteDatabase db) {
        
-      Log.v(TAG, "InstaProvider:ToDoDatabaseHelper:onCreate():Create todoList table w - "+DATABASE_CREATE);
+      //Log.v(ParseBill1.TAG, "InstaProvider:ToDoDatabaseHelper:onCreate():Create todoList table w - "+DATABASE_CREATE);
       db.execSQL(DATABASE_CREATE); 
-      Log.v(TAG, "--InstaProvider:ToDoDatabaseHelper:onCreate():todoItem table created");
-      Log.v(TAG, "InstaProvider:ToDoDatabaseHelper:onCreate():Creating billCountTable w - "+
-                                                       CREATE_BILL_IMAGE_FILE_PATH_TABLE);
+      //Log.v(ParseBill1.TAG, "--InstaProvider:ToDoDatabaseHelper:onCreate():todoItem table created");
+      //Log.v(ParseBill1.TAG, "InstaProvider:ToDoDatabaseHelper:onCreate():Creating billCountTable w - "+
+      //                                        CREATE_BILL_IMAGE_FILE_PATH_TABLE);
       db.execSQL(CREATE_BILL_IMAGE_FILE_PATH_TABLE);
-      Log.v(TAG, "--InstaProvider:ToDoDatabaseHelper:onCreate():bill_ImageFilePathTable created");
+      //Log.v(ParseBill1.TAG, "--InstaProvider:ToDoDatabaseHelper:onCreate():bill_ImageFilePathTable created");
     }
     
     
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-      Log.w(TAG, "InstaProvider:ToDoDatabaseHelper:onUpgrade()--Upgrading database from version " + oldVersion + " to "
-                  + newVersion + ", which will destroy all old data");
+      //Log.w(ParseBill1.TAG, "InstaProvider:ToDoDatabaseHelper:onUpgrade()--Upgrading database from version " + oldVersion + " to "
+      //           + newVersion + ", which will destroy all old data");
               
       db.execSQL("DROP TABLE IF EXISTS " + TODO_TABLE);
       db.execSQL("DROP TABLE IF EXISTS " + BILL_IFP_TABLE);

@@ -34,8 +34,7 @@ public class ToDoList extends Activity {
   
  
   Button splitButton;
-  Context cntxt;
-  final String TAG = "iCheck"; 
+  Context cntxt; 
   public ArrayList <PersonMath> pList;
   public ArrayList <PersonTotal> pTotal;
    
@@ -59,7 +58,7 @@ public class ToDoList extends Activity {
     splitButton.setOnClickListener(new View.OnClickListener() {
 	    public void onClick(View v) {
 	    	int cntChoice = myListView.getCount();
-	    	Log.v(TAG, "ToDoList():onCreate():splitBtnHandler():cntChoice="+cntChoice);
+	    	Log.v(ParseBill1.TAG, "ToDoList():onCreate():splitBtnHandler():cntChoice="+cntChoice);
 	    	
 	    	for(int i = 0; i < cntChoice; i++)
 	    	{	    			    	
@@ -97,7 +96,7 @@ public class ToDoList extends Activity {
 	 
 	 
       Integer latestBill_ImageNumber = InstaDBService.mNumOfRecords_inBill_IFP_Table;
-      Log.v(TAG,"ToDoList:updateArray():latestBill_ImageNum = " + latestBill_ImageNumber);
+      Log.v(ParseBill1.TAG,"ToDoList:updateArray():latestBill_ImageNum = " + latestBill_ImageNumber);
 	  toDoListCursor = getContentResolver().query(InstaProvider.CONTENT_URI, 
 		  null,  
 		  (InstaProvider.KEY_BILL_IMAGE_NUMBER + " = " + latestBill_ImageNumber),		 		  
