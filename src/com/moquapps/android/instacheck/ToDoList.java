@@ -1,6 +1,7 @@
 package com.moquapps.android.instacheck;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -31,20 +32,23 @@ public class ToDoList extends Activity {
   Spinner spinner;
   
   Cursor toDoListCursor;
-  
+  HashMap peepTotals;
  
   Button splitButton;
-  Context cntxt; 
+ 
+  Context cntxt;
+   
   public ArrayList <PersonMath> pList;
   public ArrayList <PersonTotal> pTotal;
    
+ 
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
     setContentView(R.layout.main);
     myListView = (ListView)findViewById(R.id.myListView);
     splitButton = (Button)findViewById(R.id.splitButton);
     foodItems = new ArrayList<FoodItem>();
-  
+    peepTotals = new HashMap();
     cntxt = this;
     int resID = R.layout.todolist_item;
     aa = new ToDoItemAdapter(this, resID, foodItems);
@@ -54,29 +58,55 @@ public class ToDoList extends Activity {
     bindService(intent, mConnection, Context.BIND_AUTO_CREATE); 
     populateTodoList(this);
     
-    pList = new ArrayList<PersonMath>();
+     
     splitButton.setOnClickListener(new View.OnClickListener() {
 	    public void onClick(View v) {
 	    	int cntChoice = myListView.getCount();
 	    	Log.v(ParseBill1.TAG, "ToDoList():onCreate():splitBtnHandler():cntChoice="+cntChoice);
 	    	
+	    	String key;
+	    	Double value;
+	    	
+	    	FoodItem fw;
 	    	for(int i = 0; i < cntChoice; i++)
 	    	{	    			    	
-	    		FoodItem fw = (FoodItem) myListView.getAdapter().getItem(i);
-	    		//Log.v("FoodItem", fw.toString());
-	    		//Log.v("Selection", ": "+(aa.getSelectedPersons()).get(i).toString());
-	    		PersonMath p1 = new PersonMath();
+	    		fw = (FoodItem) myListView.getAdapter().getItem(i);
+	    		 
+	    		
+	    		key = aa.getSelectedPersons().get(i).toString();
+	    		//Log.v("Selection", ": "+(;
+	    		
+	    		value = (Double) peepTotals.get(key);
+	    		if (value != null) {
+	    			try {
+	    				value += Double.parseDouble(fw._orderCount);
+	    			}
+	    			catch(Exception e) {
+	    				value += (double) 0;
+	    			}
+	    		}
+	    		else {
+	    			
+	    			try {
+	    				value = Double.parseDouble(fw._orderCount);
+	    			}
+	    			catch(Exception e) {
+	    				value = (double) 0;
+	    			}
+	    			 
+	    		}
+	    		// Log.v("Inserting: "+key, ": "+value);
 	    		  
-	    		p1.price = Double.parseDouble(fw._orderPrice);
-	    		p1.name = aa.getSelectedPersons().get(i).toString();
+	    		 peepTotals.put(key, value);
 	    		    		
-	    		pList.add(i,p1); 	    		 
+	    		  	 
 	    	}
 	    	 
 	    //	Log.v("Selection", aa.getSelectedPersons().toString());
 	    	
 	    	
 	    	Intent intentToStartTipActivity = new Intent(ToDoList.this, TipActivity.class);
+	    	intentToStartTipActivity.putExtra("hashMap", peepTotals);
 	    	startActivity(intentToStartTipActivity);
 	    	 
 	    }    
@@ -102,18 +132,13 @@ public class ToDoList extends Activity {
 		  (InstaProvider.KEY_BILL_IMAGE_NUMBER + " = " + latestBill_ImageNumber),		 		  
 	      null,  
 		  null);  
-	  
-	  
-	    
-	 
+	  	 
 	  foodItems.clear();  
 	  if (toDoListCursor.moveToFirst())
 	    do {  
 	      String orderCount = toDoListCursor.getString(toDoListCursor.getColumnIndex(InstaProvider.KEY_ORDERCOUNT)).trim();
 	      String orderName = toDoListCursor.getString(toDoListCursor.getColumnIndex(InstaProvider.KEY_ORDERNAME)).trim();
 	      String orderPrice = toDoListCursor.getString(toDoListCursor.getColumnIndex(InstaProvider.KEY_ORDERPRICE)).trim();
-		  
-	     
 	      FoodItem fItem = new FoodItem(orderCount,orderName,orderPrice);
 	      
 	      foodItems.add(0, fItem);
