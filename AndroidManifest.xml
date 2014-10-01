@@ -6,6 +6,15 @@
 
     <uses-sdk android:minSdkVersion="11" />
 
+    <permission
+        android:name="com.google.cloud.backend.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.google.cloud.backend.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -60,6 +69,12 @@
             android:name=".FinalTab"
             android:label="@string/title_activity_final_tab" >
         </activity>
+
+        <service
+            android:name=".CloudStartedService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

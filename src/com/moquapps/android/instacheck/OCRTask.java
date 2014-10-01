@@ -19,6 +19,7 @@ public class OCRTask extends AsyncTask<Void, Integer, String> {
   private TessBaseAPI tesseract;
   private ParseBill1 pBill;
   int i=0;
+  public static String mBill_ItemsToSendToCloud;
   
   public OCRTask(Context context, Bitmap bitmap, OCRCallback callback) {
     OCRTask.context = context;
@@ -48,6 +49,7 @@ public class OCRTask extends AsyncTask<Void, Integer, String> {
   @Override
   protected String doInBackground(Void... params) {
     String result = tesseract.getUTF8Text();
+    mBill_ItemsToSendToCloud = result;
     //Log.v("Processed to", result);
     return result;
   }
