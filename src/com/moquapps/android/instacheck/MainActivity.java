@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements OCRCallback {
 	private Bitmap bmp;
 	 
 	public static String checkString;	 
-	public static String mEmailAddrOfThisMobile = "instaCheck@gmail.com";//ak
+	public static String mEmailAddrOfThisMobile = "instaCheckFromCODE@gmail.com";//ak
 	
 	private final int REQUEST_CODE_GET_USERS_EMAIL_ADDR = 25;
 	

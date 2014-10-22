@@ -9,33 +9,7 @@
     tools:context="com.moquapps.android.instacheck.TipActivity" >
 
     <TextView
-        android:id="@+id/textViewP1P2Values"
-        android:layout_marginTop="6dp"
-        android:layout_marginLeft="22dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"    
-        android:textColor="#ffffff" 
-        android:textStyle="bold"   
-        android:background="#000000"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="18dp"        
-        android:text="  (P1 = xx.xx  |  P2 = yy.yy)" />        
-    
-    <!-- Line -->
-    <View    
-       android:id="@+id/viewTipLine"
-       android:layout_marginTop="60dp"
-       android:layout_width="fill_parent"
-       android:layout_height="2dp"
-       android:background="#0000ff"     
-    />
-    
-    <TextView
         android:id="@+id/textViewSeekBarProgressValue"
-        android:layout_below="@+id/viewTipLine"
         android:layout_marginTop="14dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,26 +20,29 @@
     <SeekBar 
         android:id="@+id/seekBarTipPercentage"        
         android:layout_below="@+id/textViewSeekBarProgressValue"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:background="#AAEAED" 
                                      />
-        <!-- android:progress="15" -->
+     <!-- This is absolute scale labeling work right for Nexus4 emulator. But
+       ** When run on Samsung-Tablet, the % Labels mismatch Tip % reading on slideBar; 
+       ** To fix it, "each % Label" need "relative-positioning" from Left and from Center
+       ** Will need to use weight & Gravity etc. to label the scale correctly. -->
      <TextView
-        android:id="@+id/textViewSeekBarAction"
+        android:id="@+id/textViewSeekBarLabels"
         android:layout_below="@+id/seekBarTipPercentage"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:textStyle="normal"
         android:text="\u0020 0%\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020\u0020 5% \u0020\u0020\u0020\u0020\u0020\u0020\u0020 10% \u0020\u0020\u0020\u0020\u0020\u0020\u0020 15% \u0020\u0020\u0020\u0020\u0020\u0020\u0020 20% \u0020\u0020\u0020\u0020\u0020\u0020 25% \u0020\u0020\u0020\u0020\u0020 30% . . ."
      />   
-
+          
    <!--Ref. invisible-vertical-center-Line for TipSplit Line below-->
    <View    
-      android:id="@+id/viewMidLine"
+      android:id="@+id/viewMidLine_NOT_USED_for_future_Ref"
       android:layout_width="fill_parent"
       android:layout_height="0dp"
       android:layout_centerVertical="true"
@@ -76,52 +53,94 @@
    <!-- Line -->
    <View    
       android:id="@+id/viewTipSplitLine"
-      android:layout_below="@+id/viewMidLine"
-      android:layout_marginTop="30dp"
+      android:layout_below="@+id/textViewSeekBarLabels"
+      android:layout_marginTop="40dp"
       android:layout_width="fill_parent"
-      android:layout_height="2dp"
-      android:background="#0000ff"     
+      android:layout_height="1dp"
+      android:background="#5ABAFA"     
    />
    
    <TextView
        android:id="@+id/textViewTipSplitLabel"
        android:layout_below="@+id/viewTipSplitLine"
-       android:layout_marginTop="10dp"
+       android:layout_marginTop="22dp"
+       android:layout_marginLeft="8dp"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:textSize="20sp"       
        android:textStyle="bold" 
        android:text="Tip Split" />
+   
+      <TextView
+       android:id="@+id/textViewTaxSplitLabel"
+       android:layout_below="@+id/viewTipSplitLine"
+       android:layout_toRightOf="@+id/textViewTipSplitLabel"
+       android:layout_marginTop="22dp"
+       android:layout_marginLeft="120dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:textSize="20sp"       
+       android:textStyle="bold" 
+       android:text="Tax Split" />
     
     <RadioGroup 
        android:id="@+id/radioGroupTipSplit"
        android:layout_below="@+id/textViewTipSplitLabel"
-       android:layout_marginTop="20dp"
-       android:orientation="horizontal"
+       android:layout_marginTop="12dp"
+       android:orientation="vertical"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content" >
-       <RadioButton 
-           android:id="@+id/radioButtonEqualSplit"
+
+        <RadioButton 
+           android:id="@+id/radioButtonTipPropSplit"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Propotional Split"
+           android:textSize="12sp"
+           android:checked="true"  />  
+        <RadioButton 
+           android:id="@+id/radioButtonTipEqualSplit"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="Equal Split"
-           android:checked="true"    />
-        <RadioButton 
-           android:id="@+id/radioButtonPropSplit"
-           android:layout_marginLeft="38dp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Propotional Split"  />      
+           android:textSize="12sp"        />    
     </RadioGroup>
    
+    <RadioGroup 
+       android:id="@+id/radioGroupTaxSplit"
+       android:layout_below="@+id/textViewTaxSplitLabel"
+       android:layout_marginTop="12dp"
+       android:layout_marginLeft="192dp"
+       android:orientation="vertical"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" >
+
+        <RadioButton 
+           android:id="@+id/radioButtonTaxPropSplit"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Propotional Split"
+           android:textSize="12sp"
+           android:checked="true"  />  
+        <RadioButton 
+           android:id="@+id/radioButtonTaxEqualSplit"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Equal Split"
+           android:textSize="12sp"        />    
+    </RadioGroup>
+        
     <Button
        android:id="@+id/btnNext"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_below="@+id/radioGroupTipSplit"
-       android:layout_marginLeft="220dp"
-       android:layout_marginTop="42dp"
-       android:onClick="onClickTipActivityNextBtn"       
+       android:layout_marginLeft="210dp"
+       android:layout_marginTop="38dp"
+       android:paddingLeft="20dp"
+       android:paddingRight="20dp"
+       android:onClick="onClickTipActivityNextBtn"   
+       android:textSize="18sp"    
        android:text="Next" />
 
 </RelativeLayout>

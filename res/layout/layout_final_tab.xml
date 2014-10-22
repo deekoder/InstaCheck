@@ -8,9 +8,82 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.moquapps.android.instacheck.FinalTab" >
 
+   <!-- Line -->
+   <View    
+      android:id="@+id/viewLineBeforeTitle"
+      android:layout_marginTop="14dp"
+      android:layout_width="fill_parent"
+      android:layout_height="1dp"
+      android:background="#F5EF27"   />  
+    
     <TextView
+        android:id="@+id/textViewFinalTabTitle"
+        android:layout_below="@+id/viewLineBeforeTitle"
+        android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\nFinalTab activity temp note:\n\nAny string values assigned to variable mBilll_ItemsToSendToCloud in OCRTask.java is sent to the Cloud." />
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#F5EF27"
+        android:text="Final Tab:" />
 
+       <!-- Line -->
+   <View    
+      android:id="@+id/viewLineAfterFinalTabTitle"
+      android:layout_below="@+id/textViewFinalTabTitle"
+      android:layout_marginTop="2dp"
+      android:layout_width="fill_parent"
+      android:layout_height="1dp"
+      android:background="#F5EF27"   />
+    
+    <TextView
+        android:id="@+id/textViewFinalTabSubTitlePeople"
+        android:layout_below="@+id/textViewFinalTabTitle"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#F5EF27"
+        android:text="People" />
+   
+     <TextView
+        android:id="@+id/textViewFinalTabSubTitleAmount"
+        android:layout_below="@+id/textViewFinalTabTitle"
+        android:layout_toRightOf="@+id/textViewFinalTabSubTitlePeople"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#F5EF27"
+        android:text="Amount" />
+    
+   <!-- Line -->
+   <View    
+      android:id="@+id/viewLineAfterFinalTabSubTitle"
+      android:layout_below="@+id/textViewFinalTabSubTitlePeople"
+      android:layout_marginTop="2dp"
+      android:layout_width="fill_parent"
+      android:layout_height="1dp"
+      android:background="#F5EF27"   />
+   
+   <RelativeLayout
+        android:id="@+id/relativeLayoutInner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/viewLineAfterFinalTabSubTitle"  >
+    </RelativeLayout> 
+   
+    <!-- Line -->
+   <View    
+      android:id="@+id/viewLineAfterValues"
+      android:layout_below="@+id/relativeLayoutInner"
+      android:layout_marginTop="5dp"
+      android:layout_width="fill_parent"
+      android:layout_height="1dp"
+      android:background="#F5EF27"   />  
+   
 </RelativeLayout>
