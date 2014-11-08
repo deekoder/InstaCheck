@@ -10,5 +10,12 @@
     <string name="splitText">Split</string>
     <string name="title_activity_tip">Tip Selection</string>
     <string name="title_activity_final_tab">instaCheck</string>
-
+    <string name="amountOfTipAmountLabel">amount:</string>
+    <string name="tipOfTipAmountLabel">(Tip&#160;</string>
+    <string name="tipLabel">Tip</string>
+    <string name="tipSplitLabel">Tip Split</string>
+    <string name="taxSplitLabel">Tax Split</string>
+    <string name="proportionalSplitLabel">Proportional Split</string>
+    <string name="equalSplitLabel">Equal Split</string>
+    <string name="nextLabel">Click here for Final-Tab</string>
 </resources>
