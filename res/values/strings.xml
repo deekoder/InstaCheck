@@ -18,4 +18,7 @@
     <string name="proportionalSplitLabel">Proportional Split</string>
     <string name="equalSplitLabel">Equal Split</string>
     <string name="nextLabel">Click here for Final-Tab</string>
+    <string name="FinalTabTitle">Final Tab</string>
+    <string name="PeopleSubTitle">People</string>
+    <string name="AmountSubTitle">Amount</string>
 </resources>

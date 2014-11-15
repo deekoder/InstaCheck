@@ -2,10 +2,10 @@ package com.moquapps.android.instacheck;
 /**
  * This class does following:
  * (1) Display final tab to user
- * (2) Sends bill items, tip and final tab info to 'instaCheck' CLOUD.
- *     from onResume() to test BUT change its location when finalTab coding is done. 
- * (3) It inits Cloud (hense implement OnListener) to perform above step
+ * (2) Sends bill items to google-Cloud from onResume() using Service
+ * (3) It inits Cloud (hence implements OnListener) to perform above step
  */
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -35,7 +36,13 @@ public class FinalTab extends Activity implements OnListener {
    private static final String PROCESSING_FRAGMENT_TAG = "BACKEND_FRAGMENT"; 
    private FragmentManager mFragmentManager;
    public static CloudBackendFragment mCloudBackendFragment;	
-   HashMap<String, Double> mHashMapOfPeoplesFinalTab;		
+
+   HashMap<String, Double> mHashMapOfPeoplesFinalTab;
+   CustomAdapterFinalTab customAdapterForFinalTab;
+   ListView listViewInFinalTabItems;
+   public ArrayList<FinalTabEachRowItems>arrayListOfFinalTabItems =
+		                   new ArrayList<FinalTabEachRowItems>();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,62 +53,32 @@ public class FinalTab extends Activity implements OnListener {
 		
 		displayHashMapEntries(mHashMapOfPeoplesFinalTab);
 		
+		//Cloud-Init requirement(Note:FragementManager Not allowed in Cloud-Service file)
         mFragmentManager = getFragmentManager();//CloudBackend-requirement.Note:FragmentManager NOT allowed in Service
         initiateCloudBackendFragments();//CloudBackend-requirement
 	}
 
-	public void displayHashMapEntries(HashMap<String, Double> hashMap) {
-		int loopCounter = 0;
-		final RelativeLayout relativeLayout = (RelativeLayout)findViewById(R.id.relativeLayoutInner);
-		
-		//Lets sort the HashMap entries based on keys (P1, P2 etc)
-		SortedSet<String>keys = new TreeSet<String>(hashMap.keySet());
-		
-		//for (String hashMapEntry: hashMap.keySet()){
-		for (String key : keys){
-            //String key = hashMapEntry.toString();
-            //String value = hashMap.get(hashMapEntry).toString();
-			String value = hashMap.get(key).toString();
-            Log.v(Consts.TAG_AK, "FinalTab:dispHashMapEnt():key value = " + key + " " + value);
-            
-            //display key string P1, P2 etc
-			RelativeLayout.LayoutParams layoutParamsForKey = new RelativeLayout.LayoutParams
-					((int)LayoutParams.WRAP_CONTENT, (int)LayoutParams.WRAP_CONTENT);
-			layoutParamsForKey.leftMargin= 40;
-			layoutParamsForKey.topMargin = loopCounter*50;
-			TextView tViewKey = new TextView(this);	
-			tViewKey.setText(key);
-			tViewKey.setTextSize((float) 16); 		
-			tViewKey.setTextColor(Color.YELLOW);
-			tViewKey.setLayoutParams(layoutParamsForKey);
-			relativeLayout.addView(tViewKey);            
-			
-			//display '$' char
-			RelativeLayout.LayoutParams layoutParamsFor$ = new RelativeLayout.LayoutParams
-					((int)LayoutParams.WRAP_CONTENT, (int)LayoutParams.WRAP_CONTENT);
-			layoutParamsFor$.leftMargin=130;
-			layoutParamsFor$.topMargin = loopCounter*50;
-			TextView tViewFor$ = new TextView(this);	
-			tViewFor$.setText("$");
-			tViewFor$.setTextSize((float) 16);
-			tViewFor$.setTextColor(Color.YELLOW);
-			tViewFor$.setLayoutParams(layoutParamsFor$);
-			relativeLayout.addView(tViewFor$);						
-			
-			//display value string 24.75, 2.90 etc.
-			RelativeLayout.LayoutParams layoutParamsForValue = new RelativeLayout.LayoutParams
-					         ((int)LayoutParams.WRAP_CONTENT, (int)LayoutParams.WRAP_CONTENT);
-			TextView tViewValue = new TextView(this);
-			layoutParamsForValue.leftMargin= 150;
-			layoutParamsForValue.topMargin = loopCounter*50;
-			tViewValue.setText(value.toString());
-			tViewValue.setTextSize((float)16);		
-			tViewValue.setTextColor(Color.YELLOW);
-			tViewValue.setLayoutParams(layoutParamsForValue);
-			relativeLayout.addView(tViewValue);
-			
-			loopCounter++;
-		}//for								 
+	public void displayHashMapEntries(HashMap<String, Double> hashMapOfFinalTab){
+		//Sort HashMap entries based on keys (P1, P2 etc)
+		SortedSet<String>sortedSetOfFinalTab = new TreeSet<String>(hashMapOfFinalTab.keySet());
+
+		//Copy each key, value from above sortedSetOfFinalTabItems in to the ArrayList
+		for (String key : sortedSetOfFinalTab){
+			String amount = hashMapOfFinalTab.get(key).toString();
+            Log.v(Consts.TAG_AK, "FinalTab:dispHashMapEnt():key & value = " + key + " " + amount);
+            //create a new row to add to arraylist
+            FinalTabEachRowItems itemsInEachRow = new FinalTabEachRowItems();
+            //assign values to new-row creaed above
+            itemsInEachRow.setPeopleName(key);
+            itemsInEachRow.setAmount(amount);
+            arrayListOfFinalTabItems.add(itemsInEachRow);
+		 }//for
+		 //Display the arrayList items on device
+		 listViewInFinalTabItems = (ListView)findViewById(R.id.listViewForFinalTabItems);
+	     //create custom adapter
+		 customAdapterForFinalTab = new CustomAdapterFinalTab(
+				            this, arrayListOfFinalTabItems, getResources());
+		 listViewInFinalTabItems.setAdapter(customAdapterForFinalTab);
 	}//displayHaskMapEntries()
 	
 	@Override
@@ -123,20 +100,23 @@ public class FinalTab extends Activity implements OnListener {
 	@Override
 	protected void onResume(){
 	   super.onResume();
-	   //start Started-Service here to have it send the items w Tip and FinalTab to Cloud
+	   //start CloudStartedService; This service will send all bill items to Cloud
 	   Intent i = new Intent(FinalTab.this, CloudStartedService.class);
 	   startService(i);
 	}	
 
     /*****************************************************
      * CLOUD Backend - Init & OnListener interface methods
+     * Note: Following CloudBackendFragment() method NOT allowed in 
+     * the Cloud "Service" file CloudStartedService.java -- It MUST be
+     * in an "Activity" file. 
 	 *****************************************************/
      private void initiateCloudBackendFragments() {
 		FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
 	    //Check to see if we have retained the fragment which handles
 	    //asynchronous backend calls
 	    mCloudBackendFragment = (CloudBackendFragment) mFragmentManager.
-	                         findFragmentByTag(PROCESSING_FRAGMENT_TAG);
+	                                    findFragmentByTag(PROCESSING_FRAGMENT_TAG);
 		//If not retained (or first time running), create a new one
 		if (mCloudBackendFragment == null) {
 		    mCloudBackendFragment = new CloudBackendFragment();

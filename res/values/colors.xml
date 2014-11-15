@@ -20,4 +20,8 @@
    <color name="white1">#FFFFFF</color>
    <color name="white2">#DDDDDD</color>
   
+   <!-- colors for final tab -->
+    <color name="yellow_light">#f7f7a3</color>
+    <color name="blue">#0000ff</color>
+    <color name="finalTabLineColor">#000000</color>
 </resources>
