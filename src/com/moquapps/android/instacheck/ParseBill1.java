@@ -26,7 +26,10 @@ public class ParseBill1   {
 		private String time;
 		private String clientCount; 
 		private String totalString;
-		public static double total=0.0;
+		public static double tax=0.0;
+		public static double tip=0.0;
+		public static double subTotal=0.0;
+		public static double finalTotal=0.0;
 		private FoodItem f;
 	 
 		public Context context;
@@ -165,6 +168,8 @@ public class ParseBill1   {
 				String outputs = temp.replaceAll("\\s+",""); 
 				totalString = outputs;
 				output = outputs.replaceAll("\\n","");
+				tax = Double.parseDouble(output);
+				Log.v("Tax is now",String.valueOf(tax));
 				break;
 			}
 		}
@@ -172,8 +177,8 @@ public class ParseBill1   {
 		try {
 			if(output.length() > 1) { 
 				 
-				total = Double.parseDouble(output);
-				System.out.printf("\n Total is: %2f",total);
+				tax = Double.parseDouble(output);
+				//System.out.printf("\n Total is: %2f",total);
 				 
 			}
 		}  catch (NumberFormatException nfe) {
@@ -209,6 +214,8 @@ public class ParseBill1   {
 				}
 				String outputs = temp.replaceAll("\\s+",""); 
 				totalString = outputs;
+				subTotal = Double.parseDouble(totalString);
+				Log.v("SubTotal",String.valueOf(subTotal));
 				output = outputs.replaceAll("\\n","");
 				break;
 			}
@@ -217,8 +224,8 @@ public class ParseBill1   {
 		try {
 			if(output.length() > 1) { 
 			 
-				total = Double.parseDouble(output);
-				System.out.printf("\n Total is: %2f",total);
+				subTotal = Double.parseDouble(output);
+				//Log.v("SubTotal",String.valueOf(subTotal)); 
 			 			 
 			}
 		}  catch (NumberFormatException nfe) {
@@ -234,7 +241,10 @@ public class ParseBill1   {
 		boolean noTotalFoundInToken = false;
 		while (tok.hasMoreTokens()) {
 			String token = tok.nextToken();
-			if(token.contains("Total")) {
+			if (token.contains("Sub Tot")) {
+				token = tok.nextToken();
+			}
+			if(token.contains("Tot")) {
 				 
 				StringTokenizer toks = new StringTokenizer(token,":");
 				while (toks.hasMoreTokens()) {
@@ -242,6 +252,8 @@ public class ParseBill1   {
 				}
 				String outputs = temp.replaceAll("\\s+",""); 
 				totalString = outputs;
+				finalTotal = Double.parseDouble(totalString);
+				Log.v("FinalTotal",String.valueOf(finalTotal));
 				output = outputs.replaceAll("\\n","");
 				break;
 			}
@@ -253,8 +265,9 @@ public class ParseBill1   {
 		} 
 		try {
 			if(output.length() > 1) { 
+				finalTotal = Double.parseDouble(output);
+				//Log.v("FinalTotal",String.valueOf(finalTotal)); 
 				 
-				total = Double.parseDouble(output);
 				 
 			}
 		}  catch (NumberFormatException nfe) {

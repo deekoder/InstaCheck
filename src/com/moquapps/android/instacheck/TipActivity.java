@@ -27,7 +27,7 @@ public class TipActivity extends Activity {
 	Handler seekBarHandlerToChangeProgressColor;
 	HashMap<String, Double> pTotalMap;
 	
-	public int mTipPercentSelected = 15; //default value
+	public double mTipPercentSelected = 15; //default value
 	
     //Radio buttons selection for Tip and Tax split
 	public final int TIP_EQUAL_SPLIT_SELECTED = 1;
@@ -38,8 +38,10 @@ public class TipActivity extends Activity {
 	public int mTipSplitSelection = TIP_PROPORTIONAL_SPLIT_SELECTED;//default
 	public int mTaxSplitSelection = TAX_PROPORTIONAL_SPLIT_SELECTED;//default
 	
-	double mSubTotalFromParseBill_temp = 32.11;//Get value from ParseBill1.java when 
+	double mSubTotalFromParseBill_temp = ParseBill1.subTotal;//Get value from ParseBill1.java when 
 	                                           //it works - ak - Oct24,14 
+	double mTaxFromParseBill = ParseBill1.tax;
+	
 	Double mTipAmount;
 	
 	@Override
@@ -102,18 +104,98 @@ public class TipActivity extends Activity {
 	
 	public void display(HashMap<String, Double> hMap) {
 		
+		String key;
+		String value;
 		for (String name: hMap.keySet()){
 
-            String key = name.toString();
-            String value = hMap.get(name).toString();  
+             key = name.toString();
+             value = hMap.get(name).toString();  
             //System.out.println(key + " " + value);
             Log.v(Consts.TAG_AK, "TipActivity:display():key value = " + key + " " + value);
 		} 
 	}
 	
+	public void computeTipTax(){
+		
+		String key;
+		double value, tip, tax;
+		double mTipPct;
+		mTipPct = mTipPercentSelected/100;
+		 
+		if(mTipSplitSelection == TIP_PROPORTIONAL_SPLIT_SELECTED) {
+			//Log.v("Proptional", "Tip");
+			for (String name: pTotalMap.keySet()){
+
+	             key = name.toString();
+	             value = pTotalMap.get(key);
+	             tip = mTipPct * value;
+	            // Log.v("Value is - ",String.valueOf(value));
+	            // Log.v(key,String.valueOf(mTipPct) + " : "+String.valueOf(tip));
+	             pTotalMap.put(key, value+tip);
+	            
+	            
+			}
+			
+			
+		}
+		if(mTipSplitSelection == TIP_EQUAL_SPLIT_SELECTED) {
+			
+			//Log.v("Equal", "Tip");
+			tip = (mTipPct * mSubTotalFromParseBill_temp)/pTotalMap.size();
+			
+			//Log.v("Tip now has",Double.toString(tip));
+			for (String name: pTotalMap.keySet()){
+
+	             key = name.toString();
+	             value = pTotalMap.get(key);
+	             //Log.v(key," : "+String.valueOf(tip));
+	            
+	             pTotalMap.put(key, value+tip);
+	            
+	            
+			}
+			
+		}
+		
+		if(mTaxSplitSelection == TAX_PROPORTIONAL_SPLIT_SELECTED) {
+			//Log.v("Proptional", "Tax");
+			for (String name: pTotalMap.keySet()){
+
+	             key = name.toString();
+	             value = pTotalMap.get(name);
+	             //Log.v("Value is :",String.valueOf(value));
+	             tax =  ( (value/mSubTotalFromParseBill_temp)) * mTaxFromParseBill;
+	             //Log.v(key," : "+String.valueOf(tax));
+	             pTotalMap.put(name, value+tax);
+	            
+	            
+			}
+			
+			
+			
+		}
+		if(mTaxSplitSelection == TAX_EQUAL_SPLIT_SELECTED) {
+			
+			tax =   mTaxFromParseBill/pTotalMap.size();
+			//Log.v("Equal", "Tax");
+			for (String name: pTotalMap.keySet()){
+
+	             key = name.toString();
+	             value = pTotalMap.get(name);
+	             //Log.v(key," : "+String.valueOf(tax));
+	             pTotalMap.put(name, value+tax);
+	            
+	            
+			}
+		}
+		
+		
+	}
+	
 	//"next" button handler
 	public void onClickTipActivityNextBtn(View view){
 		//start final tab activity; send hashMap pTotalMap with the intent
+		computeTipTax();
     	Intent intentToStartFinalTabActivity = new Intent(TipActivity.this, FinalTab.class);
     	intentToStartFinalTabActivity.putExtra("hashMap", pTotalMap);
     	startActivity(intentToStartFinalTabActivity);
