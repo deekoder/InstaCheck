@@ -20,8 +20,8 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
    
   
    
-  
-  public ArrayList <String> selectedPersons = new ArrayList<String>();
+  public FoodItem fw;
+  public String selectedPersons;
   
   List<String> list = new ArrayList<String>();
   
@@ -41,8 +41,12 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
     list.add("P5");
     
   }
-  public ArrayList<String> getSelectedPersons() {
+  public  String getSelectedPersons() {
 	  return selectedPersons;
+  }
+  
+  public FoodItem getAssociatedFWItem() {
+	  return fw;
   }
   private class ViewHolder {
 	    
@@ -51,13 +55,14 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
 	   TextView nameView;
 	   TextView countView;
 	   
-	  }
+   }
 
+  
   
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
   
-   ViewHolder holder = null;
+    ViewHolder holder = null;
    
   
    if (convertView == null) {
@@ -76,10 +81,17 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
    holder.personSpinner.setOnItemSelectedListener(
            new AdapterView.OnItemSelectedListener() {
                @Override
-               public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            	   Object item = parent.getItemAtPosition(position);
-            	        
-            	   selectedPersons.add(position, item.toString());
+               public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            	   Object item = parent.getItemAtPosition(pos);
+            	  
+            	   selectedPersons = item.toString();
+            	   
+            	   Log.v("Chosen spiner", selectedPersons);
+            	   fw = (FoodItem) parent.getTag();  
+            	  /* Log.v("FoodItem corresponding to spinner: " , fw._orderName);
+            	   Log.v("FoodItem corresponding to spinner: " , fw._orderPrice);
+            	   Log.v("FoodItem corresponding to spinner: " , fw._orderCount);*/
+            	   fw.selectedPerson = selectedPersons;
             	       
                }
                @Override
@@ -100,7 +112,7 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
    holder.personSpinner.setAdapter(adapter);
    FoodItem item = getItem(position);
    
-   holder.personSpinner.setTag(item._orderName);
+   holder.personSpinner.setTag(item);
     
    holder.priceView.setText(item._orderPrice);
    holder.nameView.setText(item._orderName);

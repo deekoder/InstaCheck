@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +20,7 @@ import android.widget.Spinner;
 
 import com.moquapps.android.instacheck.TodoAddBService.AddBinder;
  
-public class ToDoList extends Activity {
+public class ToDoList extends ListActivity {
 	
   
   private ArrayList<FoodItem> foodItems;
@@ -45,7 +46,8 @@ public class ToDoList extends Activity {
   public void onCreate(Bundle icicle) {
     super.onCreate(icicle);
     setContentView(R.layout.main);
-    myListView = (ListView)findViewById(R.id.myListView);
+   // myListView = (ListView)findViewById(R.id.);
+    myListView = getListView();
     splitButton = (Button)findViewById(R.id.splitButton);
     foodItems = new ArrayList<FoodItem>();
     peepTotals = new HashMap();
@@ -72,10 +74,8 @@ public class ToDoList extends Activity {
 	    	{	    			    	
 	    		fw = (FoodItem) myListView.getAdapter().getItem(i);
 	    		 
-	    		
-	    		key = aa.getSelectedPersons().get(i).toString();
-	    		//Log.v("Selection", ": "+(;
-	    		
+	    		key = fw.selectedPerson;
+	    		 
 	    		value = (Double) peepTotals.get(key);
 	    		if (value != null) {
 	    			try {
@@ -95,14 +95,14 @@ public class ToDoList extends Activity {
 	    			}
 	    			 
 	    		}
-	    		// Log.v("Inserting: "+key, ": "+value);
+	    		 
 	    		  
 	    		 peepTotals.put(key, value);
 	    		    		
 	    		  	 
 	    	}
 	    	 
-	    //	Log.v("Selection", aa.getSelectedPersons().toString());
+	  
 	    	
 	    	
 	    	Intent intentToStartTipActivity = new Intent(ToDoList.this, TipActivity.class);
