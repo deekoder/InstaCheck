@@ -204,17 +204,27 @@ public class ParseBill1   {
 		String delim = "\n";
 		String output="",temp="";
 		StringTokenizer tok = new StringTokenizer(s,delim,true);
+		 StringTokenizer toks;
 		while (tok.hasMoreTokens()) {
 			String token = tok.nextToken();
 			if (token.contains("Sub Tot")) {
 			   
-			   StringTokenizer toks = new StringTokenizer(token,":");
-			   while (toks.hasMoreTokens()) {
-					temp = toks.nextToken();
-				}
+			   toks = new StringTokenizer(token," ");
+			   if(toks.hasMoreTokens()) {
+				   while (toks.hasMoreTokens()) {
+					   temp = toks.nextToken();
+				   }
+			   }
+			   
+			   
 				String outputs = temp.replaceAll("\\s+",""); 
 				totalString = outputs;
-				subTotal = Double.parseDouble(totalString);
+				Log.v("Subtotal to be converted -",totalString);
+				try {
+					subTotal = Double.parseDouble(totalString);
+				}catch (Exception e) {
+					
+				}
 				Log.v("SubTotal",String.valueOf(subTotal));
 				output = outputs.replaceAll("\\n","");
 				break;
