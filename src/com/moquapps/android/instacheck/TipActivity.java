@@ -194,11 +194,6 @@ public class TipActivity extends Activity {
 	
 	//"next" button handler
 	public void onClickTipActivityNextBtn(View view){
-		//start final tab activity; send hashMap pTotalMap with the intent
-		computeTipTax();
-    	Intent intentToStartFinalTabActivity = new Intent(TipActivity.this, FinalTab.class);
-    	intentToStartFinalTabActivity.putExtra("hashMap", pTotalMap);
-    	startActivity(intentToStartFinalTabActivity);
     	//assign tip=split radio button selection 
     	RadioButton radioButtonTipPropSplit = (RadioButton)findViewById(R.id.radioButtonTipPropSplit);
     	if (radioButtonTipPropSplit.isChecked()){
@@ -219,5 +214,10 @@ public class TipActivity extends Activity {
     		Log.v(Consts.TAG_AK, "TipActivity:onClickNexBtn():TaxSplitEqual selected");
     		mTaxSplitSelection = TAX_EQUAL_SPLIT_SELECTED;
     	}
+    	computeTipTax();
+		//start final tab activity; send hashMap pTotalMap with the intent
+    	Intent intentToStartFinalTabActivity = new Intent(TipActivity.this, FinalTab.class);
+    	intentToStartFinalTabActivity.putExtra("hashMap", pTotalMap);
+    	startActivity(intentToStartFinalTabActivity);
 	}
 }
