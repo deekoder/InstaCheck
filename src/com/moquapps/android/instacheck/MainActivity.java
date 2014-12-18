@@ -29,7 +29,8 @@ public class MainActivity extends Activity implements OCRCallback {
 	private Bitmap bmp;
 	 
 	public static String checkString;	 
-	public static String mEmailAddrOfThisMobile = "instaCheckFromCODE@gmail.com";//ak
+	public static String mEmailAddrOfThisMobile = "emailAddrOfCode@gmail.com";//ak
+	public static Bitmap photo; //made photo public to access in FinalTab-ak 12/14/2014
 	
 	private final int REQUEST_CODE_GET_USERS_EMAIL_ADDR = 25;
 	
@@ -89,7 +90,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	          bmp.recycle();
 	     }
 	     //Bitmap photo = (Bitmap) data.getExtras().get("data"); 
-	     Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
+	     photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill2);//Fatal-Signal-11
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill15);//BAD-Infinite-loop
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill14);//BAD-Infinite-Loop

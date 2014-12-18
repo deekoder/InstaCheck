@@ -4,22 +4,26 @@ package com.moquapps.android.instacheck;
  * (1) Display final tab to user
  * (2) Sends bill items to google-Cloud from onResume() using Service
  * (3) It inits Cloud (hence implements OnListener) to perform above step
+ * Dec13,2014
+ * (1) Remove Google Cloud (will be replaced by ParseCloud)
+ *     (a)remove google-cloud Started-Service from onResume()
+ *     (b)remove google-cloud init from here as well - do not implement OnListener 
  */
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.google.cloud.backend.core.CloudBackendFragment;
-import com.google.cloud.backend.core.Consts;
-import com.google.cloud.backend.core.CloudBackendFragment.OnListener;
-import com.google.cloud.backend.core.CloudEntity;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,12 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
-public class FinalTab extends Activity implements OnListener {
-
-  //Cloud variables
-   private static final String PROCESSING_FRAGMENT_TAG = "BACKEND_FRAGMENT"; 
-   private FragmentManager mFragmentManager;
-   public static CloudBackendFragment mCloudBackendFragment;	
+public class FinalTab extends Activity {
 
    HashMap<String, Double> mHashMapOfPeoplesFinalTab;
    CustomAdapterFinalTab customAdapterForFinalTab;
@@ -52,10 +51,6 @@ public class FinalTab extends Activity implements OnListener {
 		mHashMapOfPeoplesFinalTab = (HashMap<String, Double>) intent.getSerializableExtra("hashMap");
 		
 		displayHashMapEntries(mHashMapOfPeoplesFinalTab);
-		
-		//Cloud-Init requirement(Note:FragementManager Not allowed in Cloud-Service file)
-        mFragmentManager = getFragmentManager();//CloudBackend-requirement.Note:FragmentManager NOT allowed in Service
-        initiateCloudBackendFragments();//CloudBackend-requirement
 	}
 
 	public void displayHashMapEntries(HashMap<String, Double> hashMapOfFinalTab){
@@ -65,7 +60,7 @@ public class FinalTab extends Activity implements OnListener {
 		//Copy each key, value from above sortedSetOfFinalTabItems in to the ArrayList
 		for (String key : sortedSetOfFinalTab){
 			String amount = hashMapOfFinalTab.get(key).toString();
-            Log.v(Consts.TAG_AK, "FinalTab:dispHashMapEnt():key & value = " + key + " " + amount);
+            Log.v(ParseBill1.TAG, "FinalTab:dispHashMapEnt():key & value = " + key + " " + amount);
             //create a new row to add to arraylist
             FinalTabEachRowItems itemsInEachRow = new FinalTabEachRowItems();
             //assign values to new-row creaed above
@@ -100,41 +95,32 @@ public class FinalTab extends Activity implements OnListener {
 	@Override
 	protected void onResume(){
 	   super.onResume();
+	   Log.v(ParseBill1.TAG, "FinalTab:onResume():send data to ParseCloud");
+	   //**Remove Google-Cloud and include Paser-Cloud 
 	   //start CloudStartedService; This service will send all bill items to Cloud
-	   Intent i = new Intent(FinalTab.this, CloudStartedService.class);
-	   startService(i);
+	   //Intent i = new Intent(FinalTab.this, CloudStartedService.class);
+	   //startService(i);
+	   //Create a ParseObject and send to ParseCloud
+	   ParseObject iCheckParseObject = new ParseObject("InstaCheckObject");
+	   iCheckParseObject.put("email_of_sender"/*key*/, /*value*/MainActivity.mEmailAddrOfThisMobile);
+	   iCheckParseObject.put("instaCheckItems", OCRTask.mBill_ItemsToSendToCloud);	  
+	   //------------------------------------------------------
+	   //Store "Image" of check as a field of iCheckParseObject
+	   //-------------------------------------------------------
+	   ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+	   //compress-and-copy bitmap image to byteArrayOutputStream
+	   int compressQuality = 20;
+	   MainActivity.photo.compress(CompressFormat.JPEG, compressQuality,byteArrayOutputStream);   
+	   //get outputStream to a new byteArray
+	   byte[] byteArrayImage = byteArrayOutputStream.toByteArray();
+	   //use byteArray of image to create new Parsefile to save in ParseCloud.
+	   ParseFile newParseFileForImage = new ParseFile("iCheck_Image.jpg", byteArrayImage);
+	   newParseFileForImage.saveInBackground();
+	   //assign parseCloud saved file to the instaCheck-ParseObject.
+	   iCheckParseObject.put("InstaCheckImage", newParseFileForImage);
+	   
+	   //now, save the whole iCheckObject to Parse-Cloud
+	   //iCheckParseObject.saveEventually();//not work or crashes
+	   iCheckParseObject.saveInBackground();//works!
 	}	
-
-    /*****************************************************
-     * CLOUD Backend - Init & OnListener interface methods
-     * Note: Following CloudBackendFragment() method NOT allowed in 
-     * the Cloud "Service" file CloudStartedService.java -- It MUST be
-     * in an "Activity" file. 
-	 *****************************************************/
-     private void initiateCloudBackendFragments() {
-		FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-	    //Check to see if we have retained the fragment which handles
-	    //asynchronous backend calls
-	    mCloudBackendFragment = (CloudBackendFragment) mFragmentManager.
-	                                    findFragmentByTag(PROCESSING_FRAGMENT_TAG);
-		//If not retained (or first time running), create a new one
-		if (mCloudBackendFragment == null) {
-		    mCloudBackendFragment = new CloudBackendFragment();
-		    mCloudBackendFragment.setRetainInstance(true);
-		    fragmentTransaction.add(mCloudBackendFragment, PROCESSING_FRAGMENT_TAG);
-	     }       
-	     fragmentTransaction.commit();        
-	 }
-	
-	@Override
-	public void onCreateFinished() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onBroadcastMessageReceived(List<CloudEntity> message) {
-		// TODO Auto-generated method stub
-		
-	}
 }

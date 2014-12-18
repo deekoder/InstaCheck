@@ -1,9 +1,6 @@
 package com.moquapps.android.instacheck;
 
 import java.util.HashMap;
-
-import com.google.cloud.backend.core.Consts;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -111,7 +108,7 @@ public class TipActivity extends Activity {
              key = name.toString();
              value = hMap.get(name).toString();  
             //System.out.println(key + " " + value);
-            Log.v(Consts.TAG_AK, "TipActivity:display():key value = " + key + " " + value);
+            Log.v(ParseBill1.TAG, "TipActivity:display():key value = " + key + " " + value);
 		} 
 	}
 	
@@ -197,21 +194,21 @@ public class TipActivity extends Activity {
     	//assign tip=split radio button selection 
     	RadioButton radioButtonTipPropSplit = (RadioButton)findViewById(R.id.radioButtonTipPropSplit);
     	if (radioButtonTipPropSplit.isChecked()){
-    	   Log.v(Consts.TAG_AK, "TipActivity:onClickNexBtn():TipSplitPropotional selected");
+    	   Log.v(ParseBill1.TAG, "TipActivity:onClickNexBtn():TipSplitPropotional selected");
     	   mTipSplitSelection = TIP_PROPORTIONAL_SPLIT_SELECTED;
     	}
     	else{
-    		Log.v(Consts.TAG_AK, "TipActivity:onClickNexBtn():TipSplitEqual selected");
+    		Log.v(ParseBill1.TAG, "TipActivity:onClickNexBtn():TipSplitEqual selected");
     		mTipSplitSelection = TIP_EQUAL_SPLIT_SELECTED;
     	}
     	//assign tax-split radio button selection 
     	RadioButton radioButtonTaxPropSplit = (RadioButton)findViewById(R.id.radioButtonTaxPropSplit);
     	if (radioButtonTaxPropSplit.isChecked()){
-    	   Log.v(Consts.TAG_AK, "TipActivity:onClickNexBtn():TaxSplitPropotional selected");
+    	   Log.v(ParseBill1.TAG, "TipActivity:onClickNexBtn():TaxSplitPropotional selected");
     	   mTaxSplitSelection = TAX_PROPORTIONAL_SPLIT_SELECTED;
     	}
     	else{
-    		Log.v(Consts.TAG_AK, "TipActivity:onClickNexBtn():TaxSplitEqual selected");
+    		Log.v(ParseBill1.TAG, "TipActivity:onClickNexBtn():TaxSplitEqual selected");
     		mTaxSplitSelection = TAX_EQUAL_SPLIT_SELECTED;
     	}
     	computeTipTax();
