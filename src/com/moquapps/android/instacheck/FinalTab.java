@@ -109,7 +109,7 @@ public class FinalTab extends Activity {
 	   //-------------------------------------------------------
 	   ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 	   //compress-and-copy bitmap image to byteArrayOutputStream
-	   int compressQuality = 20;
+	   int compressQuality = 100; // 20; changed Dec27,14
 	   MainActivity.photo.compress(CompressFormat.JPEG, compressQuality,byteArrayOutputStream);   
 	   //get outputStream to a new byteArray
 	   byte[] byteArrayImage = byteArrayOutputStream.toByteArray();

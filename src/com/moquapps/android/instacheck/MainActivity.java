@@ -89,8 +89,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	     if (bmp != null) {
 	          bmp.recycle();
 	     }
-	     //Bitmap photo = (Bitmap) data.getExtras().get("data"); 
-	     photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
+	     //Bitmap photo = (Bitmap) data.getExtras().get("data"); old pre-existing line
+	     photo = (Bitmap) data.getExtras().get("data"); //get pic from camera
+	     //photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill2);//Fatal-Signal-11
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill15);//BAD-Infinite-loop
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill14);//BAD-Infinite-Loop

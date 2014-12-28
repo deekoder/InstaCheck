@@ -60,8 +60,8 @@ public class ParseBill1   {
 		context = c;
 		parseString = s;
 		 
-		//Log.v(TAG,"ParseBill:print():s = "+s);
-		//Log.v(TAG,"ParseBill:print():-- finished printing long-String-s above");
+		Log.v(TAG,"ParseBill:print():s = "+s);
+		Log.v(TAG,"ParseBill:print():-- finished printing long-String-s above");
 	}
 	
 	public void updateBill_ImagePathTableAndImageCount(){
