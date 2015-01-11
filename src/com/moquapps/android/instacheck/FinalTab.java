@@ -96,14 +96,11 @@ public class FinalTab extends Activity {
 	protected void onResume(){
 	   super.onResume();
 	   Log.v(ParseBill1.TAG, "FinalTab:onResume():send data to ParseCloud");
-	   //**Remove Google-Cloud and include Paser-Cloud 
-	   //start CloudStartedService; This service will send all bill items to Cloud
-	   //Intent i = new Intent(FinalTab.this, CloudStartedService.class);
-	   //startService(i);
+	   //** Removed Google-Cloud and include Paser-Cloud ** 
 	   //Create a ParseObject and send to ParseCloud
-	   ParseObject iCheckParseObject = new ParseObject("InstaCheckObject");
-	   iCheckParseObject.put("email_of_sender"/*key*/, /*value*/MainActivity.mEmailAddrOfThisMobile);
-	   iCheckParseObject.put("instaCheckItems", OCRTask.mBill_ItemsToSendToCloud);	  
+	   ParseObject iCheckParseObject = new ParseObject("Instachecks");
+	   iCheckParseObject.put("email"/*key*/, /*value*/MainActivity.mEmailAddrOfThisMobile);
+	   iCheckParseObject.put("instacheckItems", OCRTask.mBill_ItemsToSendToCloud);	  
 	   //------------------------------------------------------
 	   //Store "Image" of check as a field of iCheckParseObject
 	   //-------------------------------------------------------
@@ -114,10 +111,10 @@ public class FinalTab extends Activity {
 	   //get outputStream to a new byteArray
 	   byte[] byteArrayImage = byteArrayOutputStream.toByteArray();
 	   //use byteArray of image to create new Parsefile to save in ParseCloud.
-	   ParseFile newParseFileForImage = new ParseFile("iCheck_Image.jpg", byteArrayImage);
+	   ParseFile newParseFileForImage = new ParseFile("instacheckImg.jpg", byteArrayImage);
 	   newParseFileForImage.saveInBackground();
 	   //assign parseCloud saved file to the instaCheck-ParseObject.
-	   iCheckParseObject.put("InstaCheckImage", newParseFileForImage);
+	   iCheckParseObject.put("instacheckImg", newParseFileForImage);
 	   
 	   //now, save the whole iCheckObject to Parse-Cloud
 	   //iCheckParseObject.saveEventually();//not work or crashes
