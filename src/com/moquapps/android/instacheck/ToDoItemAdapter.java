@@ -2,8 +2,10 @@ package com.moquapps.android.instacheck;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,33 +16,52 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
-
   int resource;
   Context c;
-   
-  
-   
   public FoodItem fw;
   public String selectedPersons;
   
   List<String> list = new ArrayList<String>();
   
-  
   public ToDoItemAdapter(Context _context, 
                              int _resource, 
                              List<FoodItem> _items) {
     super(_context, _resource, _items);
-   
     resource = _resource;
-    
     c =_context;
-    list.add("P1");
-    list.add("P2");
-    list.add("P3");
-    list.add("P4");
-    list.add("P5");
-    
+    //list.add("P1");
+    //list.add("P2");
+    //list.add("P3");
+    //list.add("P4");
+    //list.add("P5");
+    //list.add("assign...");
+    //-------------------------------------------------
+    //get names from Contact-List in android Phone - ak
+    //-------------------------------------------------
+	String selection = ContactsContract.Contacts.IN_VISIBLE_GROUP;
+	String sortOrder = ContactsContract.Contacts.DISPLAY_NAME + " ASC";
+	ContentResolver contentResolver = c.getContentResolver();
+	Cursor cursorResultSet = contentResolver.query(
+			           ContactsContract.Contacts.CONTENT_URI,
+                       null,//projection
+                       selection,
+                       null,//selectionArgs,
+                       sortOrder);
+	int numberOfContacts = cursorResultSet.getCount();
+	Log.i("ak", "Number of Contact = " + numberOfContacts);
+	if (numberOfContacts > 0){
+	   //display all names in the Contact List
+	   while (cursorResultSet.moveToNext()){
+		  String nameOfEachContact = cursorResultSet.getString
+                                     (cursorResultSet.getColumnIndex(
+		  ContactsContract.Contacts.DISPLAY_NAME));//columnName
+		  //Log.i("ak", "ContactName = " + nameOfEachContact);
+		  //add nameOfEachContact to ArrayList
+	      list.add(nameOfEachContact);
+	  }
+	}
   }
+
   public  String getSelectedPersons() {
 	  return selectedPersons;
   }
