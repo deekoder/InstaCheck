@@ -35,6 +35,8 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
     //list.add("P4");
     //list.add("P5");
     //list.add("assign...");
+    
+    
     //-------------------------------------------------
     //get names from Contact-List in android Phone - ak
     //-------------------------------------------------
@@ -59,6 +61,13 @@ public class ToDoItemAdapter extends ArrayAdapter<FoodItem> {
 		  //add nameOfEachContact to ArrayList
 	      list.add(nameOfEachContact);
 	  }
+	}
+	else {
+		list.add("P1");
+	    list.add("P2");
+	    list.add("P3");
+	    list.add("P4");
+	    list.add("P5");
 	}
   }
 

@@ -14,9 +14,9 @@
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="442dp"
-            android:background="@color/yellow"
+            android:background="@color/yellow_light"
             android:choiceMode="multipleChoice"
-            android:divider="@color/notepad_margin"
+            android:divider="@color/orange4"
             android:dividerHeight="@dimen/divvy" >
         </ListView>
 
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:background="@drawable/redbutton"
+        android:background="@color/orange"
         android:text="@string/splitText" />
 
 </LinearLayout>

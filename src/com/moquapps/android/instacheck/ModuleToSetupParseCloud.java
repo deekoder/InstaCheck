@@ -20,8 +20,8 @@ public class ModuleToSetupParseCloud extends Application {
 	   //Parse.initialize(this, "g9IFQfi4SM5c28jByj8yZuIvmir8OhvDL6Shddy5", 
 	   //                      "PLtQRiItSEEp17cKTkBZFFNlyh5Trww2clbxRzFC");
 	   //New project name on Parse.com: InstaCheckParse - Jan 10,2015
-	   Parse.initialize(this, "XjmunI0wcM09uDzVhB7luFuirs5ucvWZrqU4P8bD", 
-                              "gizkBrHe6SnHpZXwHi7gX0XlkkL1JJdJ6taHDPfy");
+	   Parse.initialize(this, "E9pb554lftVnjSLVM4W64KZzsNF1droKi3ECKe2a", 
+                              "grLgE5YcTTJhaxCYiASllYaLgGpygQu0j6v538tU");
 	    ParseUser.enableAutomaticUser();
 	    ParseACL defaultACL = new ParseACL();//ACL=Access Control List
 	      

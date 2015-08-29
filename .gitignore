@@ -2,6 +2,7 @@ bin
 gen
 .classpath
 .project
+.settings
 *.apk
 *.class
 *.dex

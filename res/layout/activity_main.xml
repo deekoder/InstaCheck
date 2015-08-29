@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/notepad_margin"
+    android:background="@color/green"
     android:orientation="horizontal" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/TablePad"
-        android:background="@color/yellow1"
+        android:background="@color/green"
         android:padding="@dimen/notepad_margin" >
 
         <ImageView
@@ -36,12 +36,13 @@
             android:id="@+id/button2"
             style="@style/ButtonText"
             android:layout_width="181dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/linearLayout1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="31dp"
-            android:background="@drawable/redbutton"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/linearLayout1"
+            android:background="@color/orange"
             android:text="@string/instStr" />
+
     </RelativeLayout>
 
 </LinearLayout>

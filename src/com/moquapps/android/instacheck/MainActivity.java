@@ -6,6 +6,7 @@ import java.io.InputStream;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 
+ 
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -90,8 +91,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	          bmp.recycle();
 	     }
 	     //Bitmap photo = (Bitmap) data.getExtras().get("data"); old pre-existing line
-	     photo = (Bitmap) data.getExtras().get("data"); //get pic from camera
-	     //photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
+	     //photo = (Bitmap) data.getExtras().get("data"); //get pic from camera
+	     photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill12);//Good-bill
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill2);//Fatal-Signal-11
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill15);//BAD-Infinite-loop
 	     //Bitmap photo = BitmapFactory.decodeResource(getResources(), R.drawable.bill14);//BAD-Infinite-Loop

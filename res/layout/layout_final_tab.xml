@@ -1,28 +1,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-   android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/yellow_light"
+    android:background="@color/green"
     tools:context="com.moquapps.android.instacheck.FinalTab" >
     
     <TextView
-       android:id="@+id/textViewTitleLabel"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_centerHorizontal="true"
-       android:textSize="30sp"
-       android:textColor="@color/blue"
-       android:textStyle="bold"
-       android:text="@string/FinalTabTitle" />
+        android:id="@+id/textViewTitleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/FinalTabTitle"
+        android:textColor="@color/finalTabLineColor"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <!-- Line -->
+
     <View
-       android:id="@+id/viewLineAfterTitleLabel"
-       android:layout_below="@+id/textViewTitleLabel"
-       android:layout_marginTop="1dp"
-       android:layout_width="fill_parent"
-       android:layout_height="2dp"
-       android:background="@color/finalTabLineColor"   />
+        android:id="@+id/viewLineAfterTitleLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/textViewTitleLabel"
+        android:layout_marginTop="1dp"
+        android:background="@color/orange" />
     
    <!-- virtual center for reference only -->
    <TextView
@@ -33,47 +34,49 @@
         android:layout_height="1dp"  />
 
      <TextView
-        android:id="@+id/textViewFinalTabSubTitlePeople"
-        android:layout_below="@+id/viewLineAfterTitleLabel"
-        android:layout_alignRight="@+id/textViewVirtualCenter"
-        android:layout_marginRight="22dp"
-        android:layout_marginTop="1dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:text="@string/PeopleSubTitle" />
+         android:id="@+id/textViewFinalTabSubTitlePeople"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignRight="@+id/textViewVirtualCenter"
+         android:layout_below="@+id/viewLineAfterTitleLabel"
+         android:layout_marginRight="22dp"
+         android:layout_marginTop="1dp"
+         android:text="@string/PeopleSubTitle"
+         android:textColor="@color/finalTabLineColor"
+         android:textSize="16sp"
+         android:textStyle="bold" />
    
      <TextView
-        android:id="@+id/textViewFinalTabSubTitleAmount"
-        android:layout_below="@+id/viewLineAfterTitleLabel"
-        android:layout_toEndOf="@+id/textViewFinalTabSubTitlePeople"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="1dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/blue"
-        android:text="@string/AmountSubTitle" />
+         android:id="@+id/textViewFinalTabSubTitleAmount"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/viewLineAfterTitleLabel"
+         android:layout_marginStart="18dp"
+         android:layout_marginTop="1dp"
+         android:layout_toEndOf="@+id/textViewFinalTabSubTitlePeople"
+         android:text="@string/AmountSubTitle"
+         android:textColor="@color/finalTabLineColor"
+         android:textSize="16sp"
+         android:textStyle="bold" />
     
    <!-- Line -->
-   <View    
-      android:id="@+id/viewLineAfterFinalTabSubTitle"
-      android:layout_below="@+id/textViewFinalTabSubTitlePeople"
-      android:layout_marginTop="2dp"
-      android:layout_width="fill_parent"
-      android:layout_height="2dp"
-      android:background="@color/finalTabLineColor"   />
+
+   <View
+       android:id="@+id/viewLineAfterFinalTabSubTitle"
+       android:layout_width="fill_parent"
+       android:layout_height="2dp"
+       android:layout_below="@+id/textViewFinalTabSubTitlePeople"
+       android:layout_marginTop="2dp"
+       android:background="@color/orange" />
    
    <ListView
-        android:id="@+id/listViewForFinalTabItems"
-        android:layout_below="@+id/viewLineAfterFinalTabSubTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/finaltab_listview_divider"
-        android:dividerHeight="4dp" />
+       android:id="@+id/listViewForFinalTabItems"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/viewLineAfterFinalTabSubTitle"
+       android:divider="@drawable/finaltab_listview_divider"
+       android:dividerHeight="4dp" />
+
         <!-- Above, dividerHeight is MUST to display "divider" in ListView.
              Line thickness of divider is NOT taken from above.
              Line Thickness is taken from drawable/finaltab_listview_divider.xml file
@@ -85,6 +88,6 @@
        android:layout_marginTop="5dp"
        android:layout_width="fill_parent"
        android:layout_height="2dp"
-       android:background="@color/finalTabLineColor"   />
+       android:background="@color/green"   />
 
 </RelativeLayout>

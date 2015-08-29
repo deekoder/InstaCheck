@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/yellow" >
+    android:background="@color/yellow_light" >
 
     <TextView
         android:id="@+id/rowDate"
@@ -13,7 +13,8 @@
         android:maxLength="3"
         android:padding="10dp"
         android:scrollbars="vertical"
-        android:textColor="@color/notepad_text" />
+        android:textColor="@color/notepad_text"
+        android:textColorHint="@color/green" />
 
     <View
         android:id="@+id/view1"
@@ -61,11 +62,14 @@
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:scrollbars="vertical"
-        android:background="@color/blue"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/view1" />
+        android:layout_below="@+id/view1"
+        android:layout_margin="@dimen/TablePad"
+        android:layout_marginBottom="@dimen/pads"
+        android:background="@color/green"
+        android:scrollbars="vertical"
+        android:textAlignment="center" />
 
 </RelativeLayout>

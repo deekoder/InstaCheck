@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/green"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -9,39 +10,44 @@
     tools:context="com.moquapps.android.instacheck.TipActivity" >
     
     <!-- To center the Tip string on display, I need to center the Colon !! -->
+
     <TextView
         android:id="@+id/textViewTipLabel_Colon"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=":"
+        android:textColor="@color/finalTabLineColor"
         android:textSize="20sp"
-        android:textStyle="bold" 
-        android:text = ":"/>
+        android:textStyle="bold" />
     
     <TextView
         android:id="@+id/textViewTipLabel"
-        android:layout_toLeftOf="@+id/textViewTipLabel_Colon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/textViewTipLabel_Colon"
+        android:text="@string/tipLabel"
+        android:textColor="@color/finalTabLineColor"
         android:textSize="24sp"
-        android:textStyle="bold" 
-        android:text = "@string/tipLabel"/>
+        android:textStyle="bold" />
     
      <TextView
-        android:id="@+id/textViewSeekBarProgressValue"
-        android:layout_toRightOf="@+id/textViewTipLabel_Colon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"    />
+         android:id="@+id/textViewSeekBarProgressValue"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_toRightOf="@+id/textViewTipLabel_Colon"
+         android:textColor="@color/finalTabLineColor"
+         android:textSize="24sp"
+         android:textStyle="bold" />
        
-    <SeekBar 
-        android:id="@+id/seekBarTipPercentage"        
+    <SeekBar
+        android:id="@+id/seekBarTipPercentage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textViewTipLabel"
         android:layout_marginTop="14dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:background="#AAEAED"   />
+        android:background="@color/orange" />
+
      <!-- This is absolute scale labeling work right for Nexus4 emulator. But
        ** When run on Samsung-Tablet, the % Labels mismatch Tip % reading on slideBar; 
        ** To fix it, "each % Label" need "relative-positioning" from Left and from Center
@@ -61,69 +67,74 @@
      -->  
      
 <TextView
-        android:id="@+id/TextView_0_label"
-        android:layout_below="@+id/seekBarTipPercentage"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="6dp"
-        android:text="0%"
-        android:textSize="12sp"       
-      />    
+    android:id="@+id/TextView_0_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/seekBarTipPercentage"
+    android:layout_marginLeft="6dp"
+    android:layout_marginTop="10dp"
+    android:text="0%"
+    android:textColor="@color/finalTabLineColor"
+    android:textSize="12sp" />
     
     <TextView
         android:id="@+id/TextView_15_label"
-        android:layout_below="@+id/seekBarTipPercentage"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBarTipPercentage"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:text="15%"
-        android:textSize="12sp"       
-    />                  
+        android:textColor="@color/finalTabLineColor"
+        android:textSize="12sp" />
        
     <TextView
         android:id="@+id/TextView_30_label"
-        android:layout_below="@+id/seekBarTipPercentage"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/seekBarTipPercentage"
+        android:layout_marginTop="10dp"
         android:text="30%"
-        android:textSize="12sp"       
-    />         
+        android:textColor="@color/finalTabLineColor"
+        android:textSize="12sp" />
+         
      <!-- To center this string on display, I need to center the word Amount ! --> 
+
      <TextView
-        android:id="@+id/textViewTipAmountLabel"
-        android:layout_below="@+id/TextView_0_label" 
-        android:layout_centerHorizontal="true"         
-        android:layout_marginTop="10dp"     
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:text="@string/amountOfTipAmountLabel"  />
+         android:id="@+id/textViewTipAmountLabel"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/TextView_0_label"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="10dp"
+         android:text="@string/amountOfTipAmountLabel"
+         android:textColor="@color/finalTabLineColor"
+         android:textSize="16sp"
+         android:textStyle="normal" />
      
        <TextView
-        android:id="@+id/textViewTipOfTipAmountLabel"
-        android:layout_below="@+id/TextView_0_label" 
-        android:layout_toLeftOf="@+id/textViewTipAmountLabel"        
-        android:layout_marginTop="10dp"     
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"        
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:text="@string/tipOfTipAmountLabel"  />   
+           android:id="@+id/textViewTipOfTipAmountLabel"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/TextView_0_label"
+           android:layout_marginTop="10dp"
+           android:layout_toLeftOf="@+id/textViewTipAmountLabel"
+           android:text="@string/tipOfTipAmountLabel"
+           android:textColor="@color/finalTabLineColor"
+           android:textSize="16sp"
+           android:textStyle="normal" />
                 
      <TextView
-        android:id="@+id/textViewTipAmount"   
-        android:layout_toRightOf="@+id/textViewTipAmountLabel"  
-        android:layout_below="@+id/TextView_0_label"   
-        android:layout_marginTop="10dp"          
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="normal"   />        
+         android:id="@+id/textViewTipAmount"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/TextView_0_label"
+         android:layout_marginTop="10dp"
+         android:layout_toRightOf="@+id/textViewTipAmountLabel"
+         android:textColor="@color/finalTabLineColor"
+         android:textSize="16sp"
+         android:textStyle="normal" />
     
    <!--Ref. invisible-vertical-center-Line for TipSplit Line below-->
    <View    
@@ -136,14 +147,14 @@
    /> 
    
    <!-- Line -->
-   <View    
-      android:id="@+id/viewTipSplitLine"
-      android:layout_below="@+id/textViewTipAmountLabel"
-      android:layout_marginTop="20dp"
-      android:layout_width="fill_parent"
-      android:layout_height="1dp"
-      android:background="#5ABAFA"     
-   />
+
+   <View
+       android:id="@+id/viewTipSplitLine"
+       android:layout_width="fill_parent"
+       android:layout_height="1dp"
+       android:layout_below="@+id/textViewTipAmountLabel"
+       android:layout_marginTop="20dp"
+       android:background="@color/orange" />
    
    <!-- Give "weight" of 1 to each Tip Split and Tax Split -->
  
@@ -158,21 +169,24 @@
    
    <TextView
        android:id="@+id/textViewTipSplitLabel"
-       android:layout_weight="1"
        android:layout_width="0dp"
-       android:layout_height="wrap_content"       
-       android:textSize="18sp"       
-       android:textStyle="bold" 
-       android:text="@string/tipSplitLabel" />
+       android:layout_height="wrap_content"
+       android:layout_weight="1"
+       android:text="@string/tipSplitLabel"
+       android:textColor="@color/finalTabLineColor"
+       android:textSize="18sp"
+       android:textStyle="bold" />
    
    <TextView
        android:id="@+id/textViewTaxSplitLabel"
-       android:layout_weight="1"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
-       android:textSize="18sp"       
-       android:textStyle="bold" 
-       android:text="@string/taxSplitLabel" />    
+       android:layout_weight="1"
+       android:text="@string/taxSplitLabel"
+       android:textColor="@color/finalTabLineColor"
+       android:textSize="18sp"
+       android:textStyle="bold" />
+    
    </LinearLayout>    
     
   <LinearLayout 
@@ -190,19 +204,23 @@
        android:layout_width="0dp"
        android:layout_height="wrap_content" >
 
-        <RadioButton 
-           android:id="@+id/radioButtonTipPropSplit"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/proportionalSplitLabel"
-           android:textSize="12sp"
-           android:checked="true"  />  
-        <RadioButton 
-           android:id="@+id/radioButtonTipEqualSplit"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/equalSplitLabel"
-           android:textSize="12sp"        />    
+        <RadioButton
+            android:id="@+id/radioButtonTipPropSplit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/proportionalSplitLabel"
+            android:textColor="@color/finalTabLineColor"
+            android:textSize="12sp" />
+  
+        <RadioButton
+            android:id="@+id/radioButtonTipEqualSplit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/equalSplitLabel"
+            android:textColor="@color/finalTabLineColor"
+            android:textSize="12sp" />
+    
     </RadioGroup>
    
     <RadioGroup 
@@ -212,36 +230,43 @@
        android:layout_width="0dp"
        android:layout_height="wrap_content" >
 
-        <RadioButton 
-           android:id="@+id/radioButtonTaxPropSplit"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/proportionalSplitLabel"
-           android:textSize="12sp"
-           android:checked="true"  />  
-        <RadioButton 
-           android:id="@+id/radioButtonTaxEqualSplit"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/equalSplitLabel"
-           android:textSize="12sp"        />    
+        <RadioButton
+            android:id="@+id/radioButtonTaxPropSplit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/proportionalSplitLabel"
+            android:textColor="@color/finalTabLineColor"
+            android:textSize="12sp" />
+  
+        <RadioButton
+            android:id="@+id/radioButtonTaxEqualSplit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/equalSplitLabel"
+            android:textColor="@color/finalTabLineColor"
+            android:textSize="12sp" />
+    
     </RadioGroup>
-   </LinearLayout>   
-        
+   </LinearLayout>
+
     <Button
         android:id="@+id/btnNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/radioGroupsForTipAndTaxSplits"
         android:layout_below="@+id/radioGroupsForTipAndTaxSplits"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"        
+        android:layout_marginBottom="73dp"
+        android:background="@color/orange"
         android:onClick="onClickTipActivityNextBtn"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
         android:text="@string/nextLabel"
-        android:textStyle="normal"
-        android:background="#AAEAED"
-        android:textColor="#0000ff"
-        android:textSize="18sp" />
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="18sp"
+        android:textStyle="normal" />
 
 </RelativeLayout>
